@@ -21,6 +21,23 @@
 		F91FA811273B49B400A412A6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F91FA810273B49B400A412A6 /* Preview Assets.xcassets */; };
 		F91FA822273B4DB500A412A6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA821273B4DB500A412A6 /* SignInView.swift */; };
 		F91FA825273B533600A412A6 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA824273B533600A412A6 /* LaunchScreenView.swift */; };
+		F91FA828273B849800A412A6 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA827273B849800A412A6 /* UserManager.swift */; };
+		F91FA82A273B885D00A412A6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA829273B885D00A412A6 /* NetworkManager.swift */; };
+		F91FA832273B8B9D00A412A6 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA82C273B8B9D00A412A6 /* Notification.swift */; };
+		F91FA833273B8B9D00A412A6 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA82D273B8B9D00A412A6 /* Task.swift */; };
+		F91FA834273B8B9D00A412A6 /* GoalsAndRoutines.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA82E273B8B9D00A412A6 /* GoalsAndRoutines.swift */; };
+		F91FA835273B8B9D00A412A6 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA82F273B8B9D00A412A6 /* UserInfo.swift */; };
+		F91FA836273B8B9D00A412A6 /* ImportantPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA830273B8B9D00A412A6 /* ImportantPeople.swift */; };
+		F91FA837273B8B9D00A412A6 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA831273B8B9D00A412A6 /* Action.swift */; };
+		F91FA839273B8C0800A412A6 /* UserDayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA838273B8C0800A412A6 /* UserDayModel.swift */; };
+		F91FA83B273B8C2200A412A6 /* EventsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA83A273B8C2200A412A6 /* EventsModel.swift */; };
+		F91FA83D273B8D1800A412A6 /* PeopleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA83C273B8D1800A412A6 /* PeopleRow.swift */; };
+		F91FA83F273B8E3900A412A6 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA83E273B8E3900A412A6 /* Formatters.swift */; };
+		F91FA841273B8EA700A412A6 /* RDSPostModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA840273B8EA600A412A6 /* RDSPostModels.swift */; };
+		F91FA844273B91BA00A412A6 /* FBTasksStepsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA842273B91BA00A412A6 /* FBTasksStepsModel.swift */; };
+		F91FA845273B91BA00A412A6 /* FBGoalRoutineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA843273B91BA00A412A6 /* FBGoalRoutineModel.swift */; };
+		F91FA847273B921000A412A6 /* StartCompleteGRATISModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA846273B921000A412A6 /* StartCompleteGRATISModel.swift */; };
+		F91FA849273B928D00A412A6 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA848273B928D00A412A6 /* NotificationHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +101,23 @@
 		F91FA813273B49B400A412A6 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		F91FA821273B4DB500A412A6 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		F91FA824273B533600A412A6 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		F91FA827273B849800A412A6 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		F91FA829273B885D00A412A6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		F91FA82C273B8B9D00A412A6 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		F91FA82D273B8B9D00A412A6 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		F91FA82E273B8B9D00A412A6 /* GoalsAndRoutines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsAndRoutines.swift; sourceTree = "<group>"; };
+		F91FA82F273B8B9D00A412A6 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		F91FA830273B8B9D00A412A6 /* ImportantPeople.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportantPeople.swift; sourceTree = "<group>"; };
+		F91FA831273B8B9D00A412A6 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		F91FA838273B8C0800A412A6 /* UserDayModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDayModel.swift; sourceTree = "<group>"; };
+		F91FA83A273B8C2200A412A6 /* EventsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsModel.swift; sourceTree = "<group>"; };
+		F91FA83C273B8D1800A412A6 /* PeopleRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleRow.swift; sourceTree = "<group>"; };
+		F91FA83E273B8E3900A412A6 /* Formatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		F91FA840273B8EA600A412A6 /* RDSPostModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RDSPostModels.swift; sourceTree = "<group>"; };
+		F91FA842273B91BA00A412A6 /* FBTasksStepsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBTasksStepsModel.swift; sourceTree = "<group>"; };
+		F91FA843273B91BA00A412A6 /* FBGoalRoutineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBGoalRoutineModel.swift; sourceTree = "<group>"; };
+		F91FA846273B921000A412A6 /* StartCompleteGRATISModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartCompleteGRATISModel.swift; sourceTree = "<group>"; };
+		F91FA848273B928D00A412A6 /* NotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +163,8 @@
 		F91FA800273B49B200A412A6 /* Manifest-Watch WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				F91FA82B273B8B7600A412A6 /* Models */,
+				F91FA826273B847D00A412A6 /* Services */,
 				F91FA823273B4F3700A412A6 /* Views */,
 				F91FA801273B49B200A412A6 /* HostingController.swift */,
 				F91FA803273B49B200A412A6 /* ContentView.swift */,
@@ -159,6 +195,37 @@
 				F91FA824273B533600A412A6 /* LaunchScreenView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F91FA826273B847D00A412A6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F91FA829273B885D00A412A6 /* NetworkManager.swift */,
+				F91FA848273B928D00A412A6 /* NotificationHandler.swift */,
+				F91FA827273B849800A412A6 /* UserManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F91FA82B273B8B7600A412A6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F91FA831273B8B9D00A412A6 /* Action.swift */,
+				F91FA83A273B8C2200A412A6 /* EventsModel.swift */,
+				F91FA843273B91BA00A412A6 /* FBGoalRoutineModel.swift */,
+				F91FA842273B91BA00A412A6 /* FBTasksStepsModel.swift */,
+				F91FA83E273B8E3900A412A6 /* Formatters.swift */,
+				F91FA82E273B8B9D00A412A6 /* GoalsAndRoutines.swift */,
+				F91FA830273B8B9D00A412A6 /* ImportantPeople.swift */,
+				F91FA82C273B8B9D00A412A6 /* Notification.swift */,
+				F91FA83C273B8D1800A412A6 /* PeopleRow.swift */,
+				F91FA840273B8EA600A412A6 /* RDSPostModels.swift */,
+				F91FA846273B921000A412A6 /* StartCompleteGRATISModel.swift */,
+				F91FA82D273B8B9D00A412A6 /* Task.swift */,
+				F91FA82F273B8B9D00A412A6 /* UserInfo.swift */,
+				F91FA838273B8C0800A412A6 /* UserDayModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,13 +355,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F91FA836273B8B9D00A412A6 /* ImportantPeople.swift in Sources */,
+				F91FA841273B8EA700A412A6 /* RDSPostModels.swift in Sources */,
+				F91FA845273B91BA00A412A6 /* FBGoalRoutineModel.swift in Sources */,
+				F91FA828273B849800A412A6 /* UserManager.swift in Sources */,
+				F91FA839273B8C0800A412A6 /* UserDayModel.swift in Sources */,
+				F91FA844273B91BA00A412A6 /* FBTasksStepsModel.swift in Sources */,
 				F91FA804273B49B200A412A6 /* ContentView.swift in Sources */,
+				F91FA83B273B8C2200A412A6 /* EventsModel.swift in Sources */,
+				F91FA82A273B885D00A412A6 /* NetworkManager.swift in Sources */,
 				F91FA822273B4DB500A412A6 /* SignInView.swift in Sources */,
+				F91FA837273B8B9D00A412A6 /* Action.swift in Sources */,
+				F91FA834273B8B9D00A412A6 /* GoalsAndRoutines.swift in Sources */,
+				F91FA849273B928D00A412A6 /* NotificationHandler.swift in Sources */,
+				F91FA833273B8B9D00A412A6 /* Task.swift in Sources */,
 				F91FA802273B49B200A412A6 /* HostingController.swift in Sources */,
+				F91FA83D273B8D1800A412A6 /* PeopleRow.swift in Sources */,
 				F91FA808273B49B200A412A6 /* NotificationController.swift in Sources */,
 				F91FA806273B49B200A412A6 /* ExtensionDelegate.swift in Sources */,
 				F91FA80A273B49B200A412A6 /* NotificationView.swift in Sources */,
+				F91FA832273B8B9D00A412A6 /* Notification.swift in Sources */,
+				F91FA847273B921000A412A6 /* StartCompleteGRATISModel.swift in Sources */,
 				F91FA80C273B49B200A412A6 /* ComplicationController.swift in Sources */,
+				F91FA835273B8B9D00A412A6 /* UserInfo.swift in Sources */,
+				F91FA83F273B8E3900A412A6 /* Formatters.swift in Sources */,
 				F91FA825273B533600A412A6 /* LaunchScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

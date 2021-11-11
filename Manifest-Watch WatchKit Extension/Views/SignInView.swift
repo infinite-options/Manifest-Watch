@@ -7,9 +7,10 @@
 //
 
 import SwiftUI
-
+//import UIKit
 
 struct SignInView: View {
+    @Environment(\.presentationMode) var presentationMode
     
     
     
@@ -18,9 +19,8 @@ struct SignInView: View {
     
     
     
-    
-    @State private var emailId = "pmarathay@gmail.com"
-    
+    @State private var emailId = "pmarathay@gmail.com"   // initializes the emailId variable
+    @ObservedObject var User = UserManager.shared        // initializes the User variable
     
     var body: some View {
         
@@ -38,12 +38,27 @@ struct SignInView: View {
             .textContentType(.username)
             .multilineTextAlignment(.center)
         
+        if self.User.isUserSignedIn == .invalidEmail {
+            Text("Incorrect Email")
+                .foregroundColor(Color.red)
+        }
         
-        
-        
-        
-        
-        Button (action: {}){
+    Button (action: {                       // when clicked ...
+            self.User.loadingUser = true    // sets loadingUser to true
+            print(self.emailId)             // prints entered email to the console
+            
+        self.User.getUserFromEmail(email: self.emailId) { (status) in  // this is a call to UserManager
+            if status == 200 {
+                print("Signed in. User ID: \(self.User.User)")
+                self.presentationMode.wrappedValue.dismiss()
+            }
+            else {
+                DispatchQueue.main.async {
+                    self.User.isUserSignedIn = .invalidEmail
+                }
+            }
+        }
+        }){
             Text("Done")
         }
         
