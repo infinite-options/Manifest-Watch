@@ -62,6 +62,7 @@
 		8026263F2522DD4500BBD6E5 /* GoalsAndRoutines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8026263E2522DD4500BBD6E5 /* GoalsAndRoutines.swift */; };
 		80262647252531E900BBD6E5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80262646252531E800BBD6E5 /* UserInfo.swift */; };
 		8026264F2525330B00BBD6E5 /* ImportantPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8026264E2525330B00BBD6E5 /* ImportantPeople.swift */; };
+		A35DF1A4273D8BA900744FBA /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35DF1A3273D8BA900744FBA /* Step.swift */; };
 		B953BE291D0A84946553CF26 /* Pods_PC_Watch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 600280C77BFFE27E9AD9744C /* Pods_PC_Watch.framework */; };
 		B9CC4E03B1FF90B49B4F56FB /* Pods_PC_Watch_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482D9F31ECC344DC84CE37D7 /* Pods_PC_Watch_WatchKit_Extension.framework */; };
 /* End PBXBuildFile section */
@@ -172,6 +173,7 @@
 		8026263E2522DD4500BBD6E5 /* GoalsAndRoutines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsAndRoutines.swift; sourceTree = "<group>"; };
 		80262646252531E800BBD6E5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		8026264E2525330B00BBD6E5 /* ImportantPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantPeople.swift; sourceTree = "<group>"; };
+		A35DF1A3273D8BA900744FBA /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		D70E07855FD8AF567D6A37E2 /* Pods-PC-Watch WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PC-Watch WatchKit App.debug.xcconfig"; path = "Target Support Files/Pods-PC-Watch WatchKit App/Pods-PC-Watch WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
 		F818EFB7EF1A5F81120871A6 /* Pods-PC-Watch WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PC-Watch WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-PC-Watch WatchKit Extension/Pods-PC-Watch WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		FD31FDA4F7659FBBD3ECB380 /* Pods-PC-Watch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PC-Watch.release.xcconfig"; path = "Target Support Files/Pods-PC-Watch/Pods-PC-Watch.release.xcconfig"; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				2BDB37A124CF755700493F9D /* StartCompleteGRATISModel.swift */,
 				0473E06C24F8870E00A73A69 /* PeopleRow.swift */,
 				3881BAB3253812CE0074FDEE /* RDSPostModels.swift */,
+				A35DF1A3273D8BA900744FBA /* Step.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 			files = (
 				8026264F2525330B00BBD6E5 /* ImportantPeople.swift in Sources */,
 				04C6CC4224D9A87A0054E637 /* SignInView.swift in Sources */,
+				A35DF1A4273D8BA900744FBA /* Step.swift in Sources */,
 				047A4A3825095C590031C7B8 /* CheckingInView.swift in Sources */,
 				2BC9C3EF24C9550800FEEA97 /* EventsModel.swift in Sources */,
 				04957BB424C5350C0031D253 /* Enums.swift in Sources */,
