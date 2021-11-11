@@ -1,0 +1,6 @@
+framework module Pods_PC_Watch {
+  umbrella header "Pods-PC-Watch-umbrella.h"
+
+  export *
+  module * { export * }
+}

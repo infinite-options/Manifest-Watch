@@ -1,0 +1,32 @@
+{
+  "images" : [
+    {
+      "filename" : "Icon-App-1024x1024 (8).png",
+      "idiom" : "watch",
+      "scale" : "2x",
+      "screen-width" : "<=145"
+    },
+    {
+      "filename" : "Icon-App-1024x1024 (8)-1.png",
+      "idiom" : "watch",
+      "scale" : "2x",
+      "screen-width" : ">161"
+    },
+    {
+      "filename" : "Icon-App-1024x1024 (8)-2.png",
+      "idiom" : "watch",
+      "scale" : "2x",
+      "screen-width" : ">145"
+    },
+    {
+      "filename" : "Icon-App-1024x1024 (9).png",
+      "idiom" : "watch",
+      "scale" : "2x",
+      "screen-width" : ">183"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

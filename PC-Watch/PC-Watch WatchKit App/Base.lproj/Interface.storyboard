@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="16097.3" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="NBu-mt-KyX">
+    <device id="watch38"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="16012"/>
+    </dependencies>
+    <scenes>
+        <!--Home-->
+        <scene sceneID="RUd-og-cv4">
+            <objects>
+                <hostingController identifier="Home" title="Home" id="NBu-mt-KyX" customClass="HostingController" customModule="PC_Watch_WatchKit_App" customModuleProvider="target">
+                    <connections>
+                        <segue destination="AXK-o7-3qk" kind="relationship" relationship="nextPage" id="Wha-XD-uxa"/>
+                    </connections>
+                </hostingController>
+            </objects>
+            <point key="canvasLocation" x="90" y="216"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="moodCategory" id="JfB-70-Muf" propertyAccessControl="none"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="eXb-UN-Cd0" kind="relationship" relationship="dynamicInteractiveNotificationInterface" id="mpB-YA-K8N"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="90" y="693"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="Niz-AI-uX2">
+            <objects>
+                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="PC_Watch_WatchKit_App" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="428" y="693"/>
+        </scene>
+        <!--AboutMe-->
+        <scene sceneID="74q-nb-jCS">
+            <objects>
+                <hostingController identifier="AboutMe" title="AboutMe" id="AXK-o7-3qk" customClass="SecondHostingController" customModule="PC_Watch_WatchKit_App" customModuleProvider="target">
+                    <connections>
+                        <segue destination="byJ-mt-Qmh" kind="relationship" relationship="nextPage" id="VcM-XX-SEE"/>
+                    </connections>
+                </hostingController>
+            </objects>
+            <point key="canvasLocation" x="428" y="216"/>
+        </scene>
+        <!--Important People-->
+        <scene sceneID="F4g-rP-j4L">
+            <objects>
+                <hostingController identifier="ImportantPeople" title="Important People" id="byJ-mt-Qmh" customClass="ThirdHostingController" customModule="PC_Watch_WatchKit_App" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="769" y="216"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="9oy-TD-hgZ">
+            <objects>
+                <notificationController id="nMV-5J-1wP">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="bs5-Km-NL7"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="checkInCategory" id="Nu7-uu-Vfs" propertyAccessControl="none"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="bs5-Km-NL7" id="9Wu-yR-6xz"/>
+                        <segue destination="xWC-rd-1P6" kind="relationship" relationship="dynamicInteractiveNotificationInterface" id="WEh-xN-mTs"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="90" y="-174"/>
+        </scene>
+        <!--Notification Controller2-->
+        <scene sceneID="IUL-1t-Kbq">
+            <objects>
+                <controller id="xWC-rd-1P6" customClass="NotificationController2" customModule="PC_Watch_WatchKit_App" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="428" y="-174"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,0 +1,6 @@
+framework module Pods_PC_Watch_WatchKit_App {
+  umbrella header "Pods-PC-Watch WatchKit App-umbrella.h"
+
+  export *
+  module * { export * }
+}
