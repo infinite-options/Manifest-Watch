@@ -38,6 +38,7 @@
 		F91FA845273B91BA00A412A6 /* FBGoalRoutineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA843273B91BA00A412A6 /* FBGoalRoutineModel.swift */; };
 		F91FA847273B921000A412A6 /* StartCompleteGRATISModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA846273B921000A412A6 /* StartCompleteGRATISModel.swift */; };
 		F91FA849273B928D00A412A6 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91FA848273B928D00A412A6 /* NotificationHandler.swift */; };
+		F9DE9DA9273CB07A00D4325D /* Steps.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DE9DA8273CB07A00D4325D /* Steps.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		F91FA843273B91BA00A412A6 /* FBGoalRoutineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBGoalRoutineModel.swift; sourceTree = "<group>"; };
 		F91FA846273B921000A412A6 /* StartCompleteGRATISModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartCompleteGRATISModel.swift; sourceTree = "<group>"; };
 		F91FA848273B928D00A412A6 /* NotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
+		F9DE9DA8273CB07A00D4325D /* Steps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Steps.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 				F91FA82D273B8B9D00A412A6 /* Task.swift */,
 				F91FA82F273B8B9D00A412A6 /* UserInfo.swift */,
 				F91FA838273B8C0800A412A6 /* UserDayModel.swift */,
+				F9DE9DA8273CB07A00D4325D /* Steps.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				F91FA837273B8B9D00A412A6 /* Action.swift in Sources */,
 				F91FA834273B8B9D00A412A6 /* GoalsAndRoutines.swift in Sources */,
 				F91FA849273B928D00A412A6 /* NotificationHandler.swift in Sources */,
+				F9DE9DA9273CB07A00D4325D /* Steps.swift in Sources */,
 				F91FA833273B8B9D00A412A6 /* Task.swift in Sources */,
 				F91FA802273B49B200A412A6 /* HostingController.swift in Sources */,
 				F91FA83D273B8D1800A412A6 /* PeopleRow.swift in Sources */,
