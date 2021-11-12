@@ -16,11 +16,11 @@ struct StepsResponse: Codable {
 
 // MARK: - Steps
 struct Steps: Codable {
-    let isUniqueID, isTitle, atID: String
-    let isSequence: Int
-    let isAvailable, isComplete, isInProgress, isTimed: String
-    let isPhoto: String
-    let isExpectedCompletionTime: String
+    var isUniqueID, isTitle, atID: String
+    var isSequence: Int
+    var isAvailable, isComplete, isInProgress, isTimed: String
+    var isPhoto: String
+    var isExpectedCompletionTime: String
 
     enum CodingKeys: String, CodingKey {
         case isUniqueID = "is_unique_id"

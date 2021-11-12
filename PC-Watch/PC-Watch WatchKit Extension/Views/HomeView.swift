@@ -366,6 +366,7 @@ struct HomeView: View {
 
     @State var fullDay = false
     @State var showLess = true
+//    @State var shouldMoveToTasks: [Bool] = Array(repeating: false, count: networkManager.goalsRoutinesData?.count)
 
     var body: some View {
         GeometryReader { geo in
@@ -384,7 +385,10 @@ struct HomeView: View {
                             List {
                                 ForEach(Array(((self.networkManager.goalsRoutinesData!.enumerated()))), id: \.offset){ index, item in
                                     VStack(alignment: .leading, spacing: 20){
-                                        NavigationLink(destination: newTaskView(goalOrRoutine: (item as GoalRoutine), goalOrRoutineIndex: index, fullDayArray: true)){
+//                                        var chosenLink = networkManager.moveToActions[(item as GoalRoutine).grUniqueID]
+                                        NavigationLink(destination: newTaskView(goalOrRoutine: (item as GoalRoutine), goalOrRoutineIndex: index, fullDayArray: true).onAppear{
+                                                        print("navigating to task pg with \(self.networkManager.actionSteps.count) actions w steps")
+                                                        self.networkManager.getSteps(grUID: (item as GoalRoutine).grUniqueID) }){
 //                                            HStack (spacing: 20) {
 //                                                infoView(item: (item as GoalRoutine))
 //                                            }.frame(height: 50)
@@ -417,6 +421,11 @@ struct HomeView: View {
 
                                     }
                                     .cornerRadius(10)
+//                                    .onTapGesture{
+////                                        self.shouldMoveToTasks = true
+//                                        self.networkManager.getSteps(grUID: (item as GoalRoutine).grUniqueID)
+//                                        NavigationLink(destination: newTaskView(goalOrRoutine: (item as GoalRoutine), goalOrRoutineIndex: index, fullDayArray: true)){}
+//                                    }
                                 }
                                 .listRowPlatterColor(Color.clear)
 //                                .listRowInsets(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
@@ -440,7 +449,9 @@ struct HomeView: View {
                             List {
                                 ForEach(Array((((self.networkManager.goalsRoutinesBlockData!.enumerated())))), id: \.offset){ index, item in
                                     VStack(alignment: .leading, spacing: 20){
-                                        NavigationLink(destination: newTaskView(goalOrRoutine: (item as GoalRoutine), goalOrRoutineIndex: index, fullDayArray: true)){
+                                        NavigationLink(destination: newTaskView(goalOrRoutine: (item as GoalRoutine), goalOrRoutineIndex: index, fullDayArray: true).onAppear{
+                                                        print("navigating to task pg with \(self.networkManager.actionSteps.count) actions w steps")
+                                                        self.networkManager.getSteps(grUID: (item as GoalRoutine).grUniqueID) }){
 //                                            HStack (spacing: 20) {
 //                                                infoView(item: (item as GoalRoutine))
 //                                            }.frame(height: 50)
@@ -491,7 +502,8 @@ struct HomeView: View {
                             .navigationBarTitle("My Day")
                         }.padding(0)
                     }
-                }.navigationBarTitle("My Day")
+                }
+                .navigationBarTitle("My Day")
             }
         }
     }

@@ -32,8 +32,17 @@ class NetworkManager: ObservableObject {
     //New Dictonary to store subTasks
     @Published var goalsSubTasks = [String: [TaskAndActions]?]()
     
+    //dictionary to store the steps for an action
+    @Published var actionSteps = [String: [Steps]?]()
+    
+    //key: gr uid, value: control which action pg is navigated to
+    @State var moveToActions = [String: Bool]()
+    
     //Temporary variable to hold tasks
     private var tasks: [TaskAndActions]?
+    
+    //temporary variable to hold steps
+    private var steps: [Steps]?
     
     let trueCase = "true"
     let falseCase = "false"
@@ -49,6 +58,7 @@ class NetworkManager: ObservableObject {
     @Published var taskStepsLeft = [String: Int]()
     
     @Published var isMustDoTasks = [String: Int]()
+    @Published var isMustDoSteps = [String: Int]()
 //    @Published var isMustDoSteps = [String: Int]()
     
     private init() {
@@ -76,6 +86,8 @@ class NetworkManager: ObservableObject {
             if let goalRoutine = data{
                 for goal in goalRoutine{
                     group.enter()
+                    print("unique id with goal name: \(goal.grUniqueID) and \(goal.grTitle)")
+                    self.moveToActions[goal.grUniqueID] = false
                     self.getTasks(goalID: goal.grUniqueID){temp in
                         self.tasks = temp
                         if self.tasks?.count != 0{
@@ -209,6 +221,92 @@ class NetworkManager: ObservableObject {
         }
         .resume()
     }
+    
+    func getSteps(grUID: String){
+        print("getSteps entered")
+        //[TaskAndActions]?
+        var actionList = goalsSubTasks[grUID]
+//        print( "size of actions is : \(actionList!!.count)" )
+        var actions: [TaskAndActions] = []
+//        var empty: [TaskAndActions] = []
+        if (actionList != nil)
+        {
+            print( "size of actions is : \(actionList!!.count)" )
+            actions = actionList!!
+            
+            for action in actions{
+                self.stepsFromActions(atUID: action.atUniqueID){ temp in
+                    self.steps = temp
+                    if self.steps?.count != 0{
+                        self.actionSteps[action.atUniqueID] = self.steps
+                        self.taskStepsLeft[action.atUniqueID] = self.steps?.count
+    //                    self.isMustDoSteps[action.atUniqueID] = 0
+                        for step in self.steps!{
+                            if (step.isComplete.lowercased() == self.trueCase){
+                                self.taskStepsLeft[action.atUniqueID]! -= 1
+                            }
+                        }
+                        print("action with steps: \(action.atUniqueID)")
+                    }
+                }
+            }
+        }
+        
+        
+    }
+    
+    //return the status
+    func stepsFromActions(atUID: String, completion: @escaping([Steps]?) -> ()) {
+        
+        var stepUrl = "https://3s3sftsr90.execute-api.us-west-1.amazonaws.com/dev/api/v2/instructionsSteps/"
+        stepUrl.append(atUID)
+        print(stepUrl)
+        guard let url = URL(string: stepUrl) else { return }
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            if let error = error {
+                print("Generic networking error: \(error)")
+            }
+            if let data = data {
+//                print("In Func Endpoint Return: \(data)")
+                print("Steps JSON String for action \(atUID): \(String(data: data, encoding: .utf8))")
+                do {
+                    let data = try JSONDecoder().decode(StepsResponse.self, from: data)
+                    completion(data.result)
+                }
+                catch _ {
+                    print("Error in parsing steps data")
+                    completion(nil)
+                }
+            }
+        }
+        .resume()
+           
+        
+//        var goalUrl = "https://3s3sftsr90.execute-api.us-west-1.amazonaws.com/dev/api/v2/getgoalsandroutines/"
+//        goalUrl.append(self.userManager.User)
+//        print(goalUrl)
+//        guard let url = URL(string: goalUrl) else { return }
+//        URLSession.shared.dataTask(with: url) { (data, _, error) in
+//            if let error = error {
+//                print("Generic networking error: \(error)")
+//            }
+//            if let data = data {
+////                print("In Func Endpoint Return: \(data)")
+//                print("JSON String: \(String(data: data, encoding: .utf8))")
+//                do {
+//                    let data = try JSONDecoder().decode(GoalsAndRoutinesResponse.self, from: data)
+//                    completion(data.result)
+//                }
+//                catch _ {
+//                    print("Error in parsing Goals data")
+//                    completion(nil)
+//                }
+//            }
+//        }
+//        .resume()
+        
+    }
+    
     func getUserProfilePhoto(url: String, completion: @escaping (UIImage) -> () ) {
         guard let photoUrl = URL(string: url) else { return }
         URLSession.shared.dataTask(with: photoUrl) { (data, _, error) in
