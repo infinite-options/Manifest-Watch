@@ -399,3 +399,436 @@
 //        }
 //    }
 //}
+
+import SwiftUI
+import UserNotifications
+
+
+struct stepInfoView: View {
+    var item: TaskAndActions?
+    @ObservedObject var viewPick = ViewController.shared
+    @ObservedObject private var model = NetworkManager.shared
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(self.item!.atTitle)
+                        .fontWeight(.bold)
+                        .font(.system(size: 16, design: .rounded))
+                        .foregroundColor(.white)
+//                        .padding(EdgeInsets(top: 0, leading: -2, bottom: 0, trailing: -2))
+//                    (item!.isPersistent.lowercased() == "true" ? Text("Starts at " + DayDateObj.formatter.string(from: DayDateObj.timeLeft.date(from: self.item!.startDayAndTime) ?? Date()))
+//                        .fontWeight(.light)
+////                        .padding(EdgeInsets(top: 0, leading: -2, bottom: 0, trailing: -2))
+//                        .font(.system(size: 12, design: .rounded)) :
+                        Text("Takes me " + self.item!.expectedCompletionTime)
+                            .fontWeight(.light)
+//                            .padding(EdgeInsets(top: 0, leading: -2, bottom: 0, trailing: -2))
+                            .font(.system(size: 12, design: .rounded))
+                        .foregroundColor(.white)
+                }
+                Spacer()
+                if (self.item!.isComplete.lowercased() == "true"){
+//                    Image("default-goal")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                        .frame(width: 37, height: 37, alignment: .center)
+//                        .opacity(0.4)
+//                        .overlay(Image(systemName: "checkmark.circle")
+//                                .font(.system(size:20))
+//                                .padding(EdgeInsets(top: 2, leading: 0, bottom: 0, trailing: 0))
+//                                .foregroundColor(.green))
+                    AsyncImage(
+                        url: URL(string: self.item!.photo)!,
+                        placeholder: Image(systemName: "default-task"))
+//                        .padding(EdgeInsets(top: 0, leading: -2, bottom: 0, trailing: -2))
+                        .opacity(0.4)
+                        .overlay(Image(systemName: "checkmark.circle")
+                                .font(.system(size:20))
+                                .padding(EdgeInsets(top: 2, leading: 0, bottom: 0, trailing: 0))
+                                .foregroundColor(.green))
+                    
+//                    SmallAssetImage(urlName: self.item!.photo, placeholder: Image("default-goal"))
+////                        .frame(width: 30, height: 30, alignment: .center)
+////                        .clipped()
+//                        .aspectRatio(contentMode: .fit)
+//                        .padding()
+//                        .opacity(0.40)
+//                        .overlay(Image(systemName: "checkmark.circle")
+//                            .font(.system(size:33))
+//                            .padding(EdgeInsets(top: 2, leading: 0, bottom: 0, trailing: 0))
+//                            .foregroundColor(.green))
+                } else if (self.item!.isInProgress.lowercased() == "true") {
+                        AsyncImage(
+                            url: URL(string: self.item!.photo)!,
+                            placeholder: Image(systemName: "default-task"))
+//                            .padding(EdgeInsets(top: 0, leading: -2, bottom: 0, trailing: -2))
+                            .opacity(0.40)
+                            .overlay(Image(systemName: "arrow.2.circlepath.circle")
+                                .font(.system(size:20))
+                                .padding(EdgeInsets(top: 2, leading: 0, bottom: 0, trailing: 0))
+                                .foregroundColor(.yellow))
+                    
+//                    SmallAssetImage(urlName: self.item!.photo, placeholder: Image("default-goal"))
+//                      SmallAssetImage(urlName: "https://www.pngitem.com/pimgs/m/519-5194627_goal-clipart-hd-png-download.png", placeholder: Image("default-goal"))
+//                        .aspectRatio(contentMode: .fit)
+//                        .padding()
+//                        .opacity(0.40)
+//                        .overlay(Image(systemName: "arrow.2.circlepath.circle")
+//                            .font(.system(size:33))
+//                            .padding(EdgeInsets(top: 2, leading: 0, bottom: 0, trailing: 0))
+//                            .foregroundColor(.yellow))
+                } else {
+//                    SmallAssetImage(urlName: self.item!.photo, placeholder: Image("default-goal"))
+//                        .aspectRatio(contentMode: .fit)
+//                        .padding()
+                    AsyncImage(
+                        url: URL(string: self.item!.photo)!,
+                        placeholder: Image(systemName: "default-task"))
+//                        .padding(EdgeInsets(top: 0, leading: -2, bottom: 0, trailing: -2))
+                } //else
+            } //hstack
+        } //vstack
+    } //body
+} //info view
+
+struct checkStepView: View {
+    var task: TaskAndActions?
+    var taskIndex: Int?
+    var goal: GoalRoutine?
+    var step: Steps?
+    var stepIndex: Int?
+    @ObservedObject var viewPick = ViewController.shared
+    @ObservedObject private var model = NetworkManager.shared
+    @State var checked = false
+    
+    var body: some View {
+        HStack {
+            Button {
+                print("checkbox pressed")
+                checked = !checked
+//                self.model.completeGoalOrRoutine(goalRoutineId: self.goalOrRoutine!.grUniqueID)
+//                self.model.goalsRoutinesData?[self.goalOrRoutineIndex!].isComplete = "True"
+//                self.model.goalsRoutinesBlockData?[self.goalOrRoutineIndex!].isComplete = "True"
+//                self.done = true
+//
+//                self.item?.isComplete = !self.item?.isComplete
+//                self.item?.isInProgress = false
+                
+                //change the specific action
+                if (self.model.actionSteps[self.task!.atUniqueID]??[stepIndex!].isComplete.lowercased() == "true")
+                {
+                    self.model.actionSteps[self.task!.atUniqueID]??[stepIndex!].isComplete = "False"
+                    self.model.taskStepsLeft[self.task!.atUniqueID]? += 1
+                }
+                else
+                {
+                    self.model.actionSteps[self.task!.atUniqueID]??[stepIndex!].isComplete = "True"
+                    self.model.taskStepsLeft[self.task!.atUniqueID]? -= 1
+                }
+                
+                self.model.actionSteps[self.task!.atUniqueID]??[stepIndex!].isInProgress = "False"
+                
+                if (self.model.taskStepsLeft[self.task!.atUniqueID]! < (self.model.actionSteps[self.task!.atUniqueID]?!.count)! &&
+                        self.model.taskStepsLeft[self.task!.atUniqueID]! > 0)
+                {
+//                        self.goal?.isInProgress = "True"
+                    self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "True"
+                    self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "False"
+                }
+                else if (self.model.taskStepsLeft[self.task!.atUniqueID]! == 0)
+                {
+                    
+                    self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "False"
+                    self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "True"
+                }
+                else
+                {
+                    self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "False"
+                    self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "False"
+                }
+//                isMustDoTasks
+            }
+            label: {
+                if (checked) {
+                    Image(systemName: "checkmark.circle")
+                        .frame(width: 30, height: 30, alignment: .center)
+                }
+                else
+                {
+                    Image(systemName: "circle")
+                        .frame(width: 30, height: 30, alignment: .center)
+                }
+            }
+            .buttonStyle(PlainButtonStyle())
+            .frame(width: 30, height: 30, alignment: .leading)
+            
+            HStack {
+                
+                
+                HStack (spacing: 5) {
+                    Spacer()
+//                    infoView(item: (self.item! as GoalRoutine))
+                    VStack(alignment: .leading) {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(self.step!.isTitle)
+                                    .fontWeight(.bold)
+                                    .font(.system(size: 16, design: .rounded))
+                                    .foregroundColor(.white)
+//                                (item!.isPersistent.lowercased() == "true" ? Text("Starts at " + DayDateObj.formatter.string(from: DayDateObj.timeLeft.date(from: self.item!.availableStartTime) ?? Date()))
+//                                    .fontWeight(.light)
+//                                    .font(.system(size: 12, design: .rounded)) :
+                                    Text("Takes me " + self.step!.isExpectedCompletionTime)
+                                        .fontWeight(.light)
+                                        .font(.system(size: 12, design: .rounded))
+                                    .foregroundColor(.white)
+                            }
+                            Spacer()
+                            if (self.step!.isComplete.lowercased() == "true"){
+                                AsyncImage(
+                                    url: URL(string: self.step!.isPhoto)!,
+                                    placeholder: Image(systemName: "default-goal"))
+                                    .opacity(0.4)
+                                    .overlay(Image(systemName: "checkmark.circle")
+                                            .font(.system(size:20))
+                                            .padding(EdgeInsets(top: 2, leading: 0, bottom: 0, trailing: 0))
+                                            .foregroundColor(.green))
+                                
+                            } else if (self.step!.isInProgress.lowercased() == "true") {
+                                    AsyncImage(
+                                        url: URL(string: self.step!.isPhoto)!,
+                                        placeholder: Image(systemName: "default-goal"))
+                                        .opacity(0.40)
+                                        .overlay(Image(systemName: "arrow.2.circlepath.circle")
+                                            .font(.system(size:20))
+                                            .padding(EdgeInsets(top: 2, leading: 0, bottom: 0, trailing: 0))
+                                            .foregroundColor(.yellow))
+                                
+                            } else {
+                                AsyncImage(
+                                    url: URL(string: self.step!.isPhoto)!,
+                                    placeholder: Image(systemName: "default-goal"))
+                            } //else
+                        } //hstack
+                    } //vstack
+                    
+                    Spacer()
+                }.frame(height: 50)
+                .background(Color(#colorLiteral(red: 0.3647058824, green: 0.6078431373, blue: 0.8980392157, alpha: 1)))
+                .cornerRadius(10)
+            } //hstack
+            .onTapGesture {
+                checked = !checked
+                
+                //change the specific action
+                if (self.model.actionSteps[self.task!.atUniqueID]??[stepIndex!].isComplete.lowercased() == "true")
+                {
+                    self.model.actionSteps[self.task!.atUniqueID]??[stepIndex!].isComplete = "False"
+                    self.model.taskStepsLeft[self.task!.atUniqueID]? += 1
+                }
+                else
+                {
+                    self.model.actionSteps[self.task!.atUniqueID]??[stepIndex!].isComplete = "True"
+                    self.model.taskStepsLeft[self.task!.atUniqueID]? -= 1
+                }
+                
+                print("steps left: \(self.model.taskStepsLeft[self.task!.atUniqueID]!)")
+                
+                self.model.actionSteps[self.task!.atUniqueID]??[stepIndex!].isInProgress = "False"
+                
+                if (self.model.taskStepsLeft[self.task!.atUniqueID]! < (self.model.actionSteps[self.task!.atUniqueID]?!.count)! &&
+                        self.model.taskStepsLeft[self.task!.atUniqueID]! > 0)
+                {
+//                        self.goal?.isInProgress = "True"
+                    self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "True"
+                    self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "False"
+                }
+                else if (self.model.taskStepsLeft[self.task!.atUniqueID]! == 0)
+                {
+                    print("no steps left")
+                    self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "False"
+                    self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "True"
+                }
+                else
+                {
+                    self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "False"
+                    self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "False"
+                }
+            }
+            
+        } //vstack
+    } //body
+} //checktaskview
+
+
+struct newStepView: View{
+    @ObservedObject private var model = NetworkManager.shared
+    @ObservedObject private var user = UserManager.shared
+    var goalOrRoutine: GoalRoutine?
+    var goalOrRoutineIndex: Int?
+    var chosenTask: TaskAndActions?
+    var taskIndex: Int?
+    var fullDayArray: Bool
+    var notificationCenter = NotificationCenter()
+    var extensionDelegate = ExtensionDelegate()
+    @State var done = false
+    @State var started = false
+    
+    var body: some View {
+        GeometryReader{ geo in
+            if(self.model.actionSteps[self.chosenTask!.atUniqueID] == nil){
+                VStack(alignment: .center){
+                    
+                    //routines - red
+                    if((self.chosenTask!.isComplete.lowercased() == "true")){
+                        HStack (spacing: 5) {
+                            Spacer()
+                            stepInfoView(item: (self.chosenTask! as TaskAndActions?))
+                                .opacity(0.60)
+                                .overlay(Image(systemName: "checkmark.circle")
+                                    .font(.system(size:30))
+                                    .padding(EdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0))
+                                    .foregroundColor(.green))
+                            Spacer()
+                        }.frame(height: 50)
+                        .background(Color(#colorLiteral(red: 1, green: 0.7411764706, blue: 0.1529411765, alpha: 1)))
+                        .cornerRadius(10)
+                    }
+                    //goals - yellow
+                    else{
+                        HStack (spacing: 5) {
+                            Spacer()
+                            stepInfoView(item: (self.chosenTask! as TaskAndActions?))
+                            Spacer()
+                        }.frame(height: 50)
+                        .background(Color(#colorLiteral(red: 1, green: 0.7411764706, blue: 0.1529411765, alpha: 1)))
+                        .cornerRadius(10)
+                    }
+                    
+                    
+                    Spacer()
+                    if(!self.done && (self.chosenTask!.isComplete.lowercased() == "false")){
+                        Button(action: {
+                            print("done button clicked")
+                            self.model.completeGoalOrRoutine(goalRoutineId: self.goalOrRoutine!.grUniqueID)
+                            self.model.goalsRoutinesData?[self.goalOrRoutineIndex!].isComplete = "True"
+                            self.model.goalsRoutinesBlockData?[self.goalOrRoutineIndex!].isComplete = "True"
+                            self.done = true
+                            self.extensionDelegate.scheduleMoodNotification()
+                        }) {
+                            Text("All Done?")
+                                .fontWeight(.bold)
+                                .font(.system(size: 16, design: .rounded))
+                                .foregroundColor(.green)
+                        }.padding(2)
+                    } else {
+                        RoundedRectangle(cornerSize: CGSize(width: 120, height: 30), style: .continuous)
+                            .stroke(Color.green, lineWidth: 1)
+                            .overlay(Text("Goal Completed")
+                                .fontWeight(.bold)
+                                .foregroundColor(.green)
+                                .font(.system(size: 16, design: .rounded)))
+                            .padding(2)
+                    }
+                }
+            } else {
+                ScrollView([.vertical]){
+                    VStack(alignment: .center){
+                        //routines - red
+                        if((self.done || (self.chosenTask!.isComplete.lowercased() == "true"))){
+                            HStack (spacing: 5) {
+                                Spacer()
+                                stepInfoView(item: (self.chosenTask! as TaskAndActions?))
+                                    .opacity(0.60)
+                                    .overlay(Image(systemName: "checkmark.circle")
+                                        .font(.system(size:30))
+                                        .padding(EdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0))
+                                        .foregroundColor(.green))
+                                Spacer()
+                            }.frame(height: 50)
+                            .background(Color(#colorLiteral(red: 0.9725490196, green: 0.4196078431, blue: 0.2862745098, alpha: 1)))
+                            .cornerRadius(10)
+                        }
+                        //goals - yellow
+                        else if(self.done || (self.chosenTask!.isComplete.lowercased() == "true")){
+                            HStack (spacing: 5) {
+                                Spacer()
+                                stepInfoView(item: (self.chosenTask! as TaskAndActions?))
+                                    .opacity(0.60)
+                                    .overlay(Image(systemName: "checkmark.circle")
+                                        .font(.system(size:30))
+                                        .padding(EdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0))
+                                        .foregroundColor(.green))
+                                Spacer()
+                            }.frame(height: 50)
+                            .background(Color(#colorLiteral(red: 1, green: 0.7411764706, blue: 0.1529411765, alpha: 1)))
+                            .cornerRadius(10)
+                        }
+                        //goals - yellow
+                        else{
+                            HStack (spacing: 5) {
+                                Spacer()
+                                stepInfoView(item: (self.chosenTask! as TaskAndActions?))
+                                Spacer()
+                            }.frame(height: 50)
+                            .background(Color(#colorLiteral(red: 1, green: 0.7411764706, blue: 0.1529411765, alpha: 1)))
+                            .cornerRadius(10)
+                        }
+                        
+                        
+                        Spacer()
+                        if(!self.done && self.chosenTask!.isComplete.lowercased() == "true"){
+                            RoundedRectangle(cornerSize: CGSize(width: 120, height: 30), style: .continuous)
+                                .stroke(Color.green, lineWidth: 1)
+                                .frame(width:140, height:25)
+                                .overlay(Text("Task Completed")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.green)
+                                    .font(.system(size: 16, design: .rounded)))
+                                .padding(2)
+                        } else {
+                            if(!self.started && self.chosenTask!.isInProgress.lowercased() == "false"){                       //if it is not started show a start button
+                                Button(action: {
+                                    self.started = true
+                                    self.model.goalsRoutinesData?[self.goalOrRoutineIndex!].isInProgress = "True"
+                                    self.model.goalsRoutinesBlockData?[self.goalOrRoutineIndex!].isInProgress = "True"
+                                    // start goal
+                                    self.model.startGoalOrRoutine(goalRoutineId: self.goalOrRoutine!.grUniqueID)
+                                }) {
+                                    Text("Start")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.yellow)
+                                        .font(.system(size: 16, design: .rounded))
+                                }
+                            } else {                                                                                //if it is started show a Started Text
+                                RoundedRectangle(cornerSize: CGSize(width: 120, height: 30), style: .continuous)
+                                    .stroke(Color.yellow, lineWidth: 1)
+                                    .frame(width:140, height:25)
+                                    .overlay(Text("Started")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.yellow)
+                                        .font(.system(size: 16, design: .rounded)))
+                                    .padding(2)
+                            }
+                        }
+                    }.padding(.bottom, 0)
+                    .background(Color.clear)
+                    
+                    
+                    //new ui
+                    ForEach(Array((self.model.actionSteps[self.chosenTask!.atUniqueID]!?.enumerated())!), id: \.offset){ index, item in
+                        HStack {
+                            checkStepView(task: (self.chosenTask! as TaskAndActions?), taskIndex: self.taskIndex, goal: goalOrRoutine, step: item, stepIndex: index)
+                        }
+                    }
+
+                    
+                }.frame(height: geo.size.height)
+                .padding(0)
+                .navigationBarTitle(self.chosenTask!.atTitle)
+            }
+        }.onAppear()
+    }
+}

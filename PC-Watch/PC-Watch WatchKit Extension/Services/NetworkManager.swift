@@ -50,7 +50,7 @@ class NetworkManager: ObservableObject {
     //Key: Goal, Value: tasks
     @Published var goalsSubtasks = [String: [ValueTask]?]()
     //Key: Task, Value: steps
-    @Published var taskSteps = [String: [ValueTask]?]()
+    @Published var taskSteps = [String: [Steps]?]()
     
     // Key: Goal, Value: # of tasks in Goal
     @Published var goalSubtasksLeft = [String: Int]()

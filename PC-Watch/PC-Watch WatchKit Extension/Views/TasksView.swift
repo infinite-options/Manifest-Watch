@@ -117,6 +117,7 @@ struct checkTaskView: View {
     var task: TaskAndActions?
     var taskIndex: Int?
     var goal: GoalRoutine?
+    var grIndex: Int?
     @ObservedObject var viewPick = ViewController.shared
     @ObservedObject private var model = NetworkManager.shared
     @State var checked = false
@@ -139,18 +140,46 @@ struct checkTaskView: View {
                 {
                     self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isComplete = "False"
                     self.model.goalSubtasksLeft[self.goal!.grUniqueID]? += 1
+                    if (self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isMustDo.lowercased() == "true")
+                    { self.model.isMustDoTasks[self.goal!.grUniqueID]? += 1 }
                 }
                 else
                 {
                     self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isComplete = "True"
                     self.model.goalSubtasksLeft[self.goal!.grUniqueID]? -= 1
+                    if (self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isMustDo.lowercased() == "true")
+                    { self.model.isMustDoTasks[self.goal!.grUniqueID]? -= 1 }
                 }
                 
                 self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isInProgress = "False"
+                
+                if (self.model.goalSubtasksLeft[self.goal!.grUniqueID]! < (self.model.goalsSubTasks[self.goal!.grUniqueID]?!.count)! &&
+                        self.model.goalSubtasksLeft[self.goal!.grUniqueID]! > 0)
+                {
+//                        self.goal?.isInProgress = "True"
+                    self.model.goalsRoutinesData![self.grIndex!].isInProgress = "True"
+                    self.model.goalsRoutinesBlockData![self.grIndex!].isInProgress = "True"
+                    self.model.goalsRoutinesData![self.grIndex!].isComplete = "False"
+                    self.model.goalsRoutinesBlockData![self.grIndex!].isComplete = "False"
+                }
+                else if (self.model.goalSubtasksLeft[self.goal!.grUniqueID]! == 0)
+                {
+                    self.model.goalsRoutinesData![self.grIndex!].isInProgress = "False"
+                    self.model.goalsRoutinesBlockData![self.grIndex!].isInProgress = "False"
+                    self.model.goalsRoutinesData![self.grIndex!].isComplete = "True"
+                    self.model.goalsRoutinesBlockData![self.grIndex!].isComplete = "True"
+                }
+                else
+                {
+                    self.model.goalsRoutinesData![self.grIndex!].isInProgress = "False"
+                    self.model.goalsRoutinesBlockData![self.grIndex!].isInProgress = "False"
+                    self.model.goalsRoutinesData![self.grIndex!].isComplete = "False"
+                    self.model.goalsRoutinesBlockData![self.grIndex!].isComplete = "False"
+                }
 //                isMustDoTasks
             }
             label: {
-                if (checked) {
+                if (checked || self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isComplete.lowercased() == "true") {
                     Image(systemName: "checkmark.circle")
                         .frame(width: 30, height: 30, alignment: .center)
                 }
@@ -163,64 +192,170 @@ struct checkTaskView: View {
             .buttonStyle(PlainButtonStyle())
             .frame(width: 30, height: 30, alignment: .leading)
             
-            NavigationLink(destination: HomeView()) {
-            HStack {
-                
-                
-                HStack (spacing: 5) {
-                    Spacer()
-//                    infoView(item: (self.item! as GoalRoutine))
-                    VStack(alignment: .leading) {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(self.task!.atTitle)
-                                    .fontWeight(.bold)
-                                    .font(.system(size: 16, design: .rounded))
-                                    .foregroundColor(.white)
-//                                (item!.isPersistent.lowercased() == "true" ? Text("Starts at " + DayDateObj.formatter.string(from: DayDateObj.timeLeft.date(from: self.item!.availableStartTime) ?? Date()))
-//                                    .fontWeight(.light)
-//                                    .font(.system(size: 12, design: .rounded)) :
-                                    Text("Takes me " + self.task!.expectedCompletionTime)
-                                        .fontWeight(.light)
-                                        .font(.system(size: 12, design: .rounded))
-                                    .foregroundColor(.white)
-                            }
-                            Spacer()
-                            if (self.task!.isComplete.lowercased() == "true"){
-                                AsyncImage(
-                                    url: URL(string: self.task!.photo)!,
-                                    placeholder: Image(systemName: "default-goal"))
-                                    .opacity(0.4)
-                                    .overlay(Image(systemName: "checkmark.circle")
-                                            .font(.system(size:20))
-                                            .padding(EdgeInsets(top: 2, leading: 0, bottom: 0, trailing: 0))
-                                            .foregroundColor(.green))
-                                
-                            } else if (self.task!.isInProgress.lowercased() == "true") {
+            if (self.task?.isSublistAvailable.lowercased() == "true")
+            {
+                NavigationLink(destination: newStepView(goalOrRoutine: (self.goal! as GoalRoutine), goalOrRoutineIndex: self.grIndex, chosenTask: self.task, taskIndex: self.taskIndex, fullDayArray: true)) {
+                HStack {
+                    
+                    
+                    HStack (spacing: 5) {
+                        Spacer()
+    //                    infoView(item: (self.item! as GoalRoutine))
+                        VStack(alignment: .leading) {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(self.task!.atTitle)
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 16, design: .rounded))
+                                        .foregroundColor(.white)
+    //                                (item!.isPersistent.lowercased() == "true" ? Text("Starts at " + DayDateObj.formatter.string(from: DayDateObj.timeLeft.date(from: self.item!.availableStartTime) ?? Date()))
+    //                                    .fontWeight(.light)
+    //                                    .font(.system(size: 12, design: .rounded)) :
+                                        Text("Takes me " + self.task!.expectedCompletionTime)
+                                            .fontWeight(.light)
+                                            .font(.system(size: 12, design: .rounded))
+                                        .foregroundColor(.white)
+                                }
+                                Spacer()
+                                if (self.task!.isComplete.lowercased() == "true"){
                                     AsyncImage(
                                         url: URL(string: self.task!.photo)!,
                                         placeholder: Image(systemName: "default-goal"))
-                                        .opacity(0.40)
-                                        .overlay(Image(systemName: "arrow.2.circlepath.circle")
-                                            .font(.system(size:20))
-                                            .padding(EdgeInsets(top: 2, leading: 0, bottom: 0, trailing: 0))
-                                            .foregroundColor(.yellow))
-                                
-                            } else {
-                                AsyncImage(
-                                    url: URL(string: self.task!.photo)!,
-                                    placeholder: Image(systemName: "default-goal"))
-                            } //else
-                        } //hstack
-                    } //vstack
+                                        .opacity(0.4)
+                                        .overlay(Image(systemName: "checkmark.circle")
+                                                .font(.system(size:20))
+                                                .padding(EdgeInsets(top: 2, leading: 0, bottom: 0, trailing: 0))
+                                                .foregroundColor(.green))
+                                    
+                                } else if (self.task!.isInProgress.lowercased() == "true") {
+                                        AsyncImage(
+                                            url: URL(string: self.task!.photo)!,
+                                            placeholder: Image(systemName: "default-goal"))
+                                            .opacity(0.40)
+                                            .overlay(Image(systemName: "arrow.2.circlepath.circle")
+                                                .font(.system(size:20))
+                                                .padding(EdgeInsets(top: 2, leading: 0, bottom: 0, trailing: 0))
+                                                .foregroundColor(.yellow))
+                                    
+                                } else {
+                                    AsyncImage(
+                                        url: URL(string: self.task!.photo)!,
+                                        placeholder: Image(systemName: "default-goal"))
+                                } //else
+                            } //hstack
+                        } //vstack
+                        
+                        Spacer()
+                    }.frame(height: 50)
+                    .background(Color(#colorLiteral(red: 1, green: 0.7411764706, blue: 0.1529411765, alpha: 1)))
+                    .cornerRadius(10)
+                } //hstack
+                } //navigationlink
+                .buttonStyle(PlainButtonStyle())
+            }
+            else
+            {
+                HStack {
                     
-                    Spacer()
-                }.frame(height: 50)
-                .background(Color(#colorLiteral(red: 1, green: 0.7411764706, blue: 0.1529411765, alpha: 1)))
-                .cornerRadius(10)
-            } //hstack
-            } //navigationlink
-            .buttonStyle(PlainButtonStyle())
+                    
+                    HStack (spacing: 5) {
+                        Spacer()
+    //                    infoView(item: (self.item! as GoalRoutine))
+                        VStack(alignment: .leading) {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(self.task!.atTitle)
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 16, design: .rounded))
+                                        .foregroundColor(.white)
+    //                                (item!.isPersistent.lowercased() == "true" ? Text("Starts at " + DayDateObj.formatter.string(from: DayDateObj.timeLeft.date(from: self.item!.availableStartTime) ?? Date()))
+    //                                    .fontWeight(.light)
+    //                                    .font(.system(size: 12, design: .rounded)) :
+                                        Text("Takes me " + self.task!.expectedCompletionTime)
+                                            .fontWeight(.light)
+                                            .font(.system(size: 12, design: .rounded))
+                                        .foregroundColor(.white)
+                                }
+                                Spacer()
+                                if (self.task!.isComplete.lowercased() == "true"){
+                                    AsyncImage(
+                                        url: URL(string: self.task!.photo)!,
+                                        placeholder: Image(systemName: "default-goal"))
+                                        .opacity(0.4)
+                                        .overlay(Image(systemName: "checkmark.circle")
+                                                .font(.system(size:20))
+                                                .padding(EdgeInsets(top: 2, leading: 0, bottom: 0, trailing: 0))
+                                                .foregroundColor(.green))
+                                    
+                                } else if (self.task!.isInProgress.lowercased() == "true") {
+                                        AsyncImage(
+                                            url: URL(string: self.task!.photo)!,
+                                            placeholder: Image(systemName: "default-goal"))
+                                            .opacity(0.40)
+                                            .overlay(Image(systemName: "arrow.2.circlepath.circle")
+                                                .font(.system(size:20))
+                                                .padding(EdgeInsets(top: 2, leading: 0, bottom: 0, trailing: 0))
+                                                .foregroundColor(.yellow))
+                                    
+                                } else {
+                                    AsyncImage(
+                                        url: URL(string: self.task!.photo)!,
+                                        placeholder: Image(systemName: "default-goal"))
+                                } //else
+                            } //hstack
+                        } //vstack
+                        
+                        Spacer()
+                    }.frame(height: 50)
+                    .background(Color(#colorLiteral(red: 1, green: 0.7411764706, blue: 0.1529411765, alpha: 1)))
+                    .cornerRadius(10)
+                } //hstack
+                .onTapGesture {
+                    checked = !checked
+                    //change the specific action
+                    if (self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isComplete.lowercased() == "true")
+                    {
+                        self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isComplete = "False"
+                        self.model.goalSubtasksLeft[self.goal!.grUniqueID]? += 1
+                        if (self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isMustDo.lowercased() == "true")
+                        { self.model.isMustDoTasks[self.goal!.grUniqueID]? += 1 }
+                    }
+                    else
+                    {
+                        self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isComplete = "True"
+                        self.model.goalSubtasksLeft[self.goal!.grUniqueID]? -= 1
+                        if (self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isMustDo.lowercased() == "true")
+                        { self.model.isMustDoTasks[self.goal!.grUniqueID]? -= 1 }
+                    }
+                    
+                    self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isInProgress = "False"
+                    
+                    if (self.model.goalSubtasksLeft[self.goal!.grUniqueID]! < (self.model.goalsSubTasks[self.goal!.grUniqueID]?!.count)! &&
+                            self.model.goalSubtasksLeft[self.goal!.grUniqueID]! > 0)
+                    {
+//                        self.goal?.isInProgress = "True"
+                        self.model.goalsRoutinesData![self.grIndex!].isInProgress = "True"
+                        self.model.goalsRoutinesBlockData![self.grIndex!].isInProgress = "True"
+                        self.model.goalsRoutinesData![self.grIndex!].isComplete = "False"
+                        self.model.goalsRoutinesBlockData![self.grIndex!].isComplete = "False"
+                    }
+                    else if (self.model.goalSubtasksLeft[self.goal!.grUniqueID]! == 0)
+                    {
+                        self.model.goalsRoutinesData![self.grIndex!].isInProgress = "False"
+                        self.model.goalsRoutinesBlockData![self.grIndex!].isInProgress = "False"
+                        self.model.goalsRoutinesData![self.grIndex!].isComplete = "True"
+                        self.model.goalsRoutinesBlockData![self.grIndex!].isComplete = "True"
+                    }
+                    else
+                    {
+                        self.model.goalsRoutinesData![self.grIndex!].isInProgress = "False"
+                        self.model.goalsRoutinesBlockData![self.grIndex!].isInProgress = "False"
+                        self.model.goalsRoutinesData![self.grIndex!].isComplete = "False"
+                        self.model.goalsRoutinesBlockData![self.grIndex!].isComplete = "False"
+                    }
+                }
+                
+            } //end of else
             
         } //vstack
     } //body
@@ -295,27 +430,6 @@ struct newTaskView: View{
                     }
                     
                     
-//                    if(self.done || (self.goalOrRoutine!.isComplete.lowercased() == "true")){
-//                        AssetImage(urlName: self.goalOrRoutine!.photo, placeholder: Image("default-goal"))
-//                            .aspectRatio(contentMode: .fit)
-//                            .opacity(0.60)
-//                            .overlay(Image(systemName: "checkmark.circle")
-//                                .font(.system(size:55))
-//                                .padding(EdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0))
-//                                .foregroundColor(.green))
-//                    } else {
-//                        AssetImage(urlName: self.goalOrRoutine!.photo, placeholder: Image("default-goal"))
-//                            .aspectRatio(contentMode: .fit)
-//                    }
-                    
-//                    Text(self.goalOrRoutine!.grTitle)
-//                        .fontWeight(.bold)
-//                        .lineLimit(nil)
-//                        .padding()
-//                        .font(.system(size: 18, design: .rounded))
-//                    Text("Takes me " + self.goalOrRoutine!.expectedCompletionTime)
-//                        .fontWeight(.light)
-//                        .font(.system(size: 12, design: .rounded))
                     Spacer()
                     if(!self.done && (self.goalOrRoutine!.isComplete.lowercased() == "false")){
                         Button(action: {
@@ -397,33 +511,6 @@ struct newTaskView: View{
                         }
                         
                         
-//                                        var chosenLink = networkManager.moveToActions[(item as GoalRoutine).grUniqueID]
-                            
-             
-                        
-//                        if (self.done || self.goalOrRoutine!.isComplete.lowercased() == "true"){
-//                            AssetImage(urlName: self.goalOrRoutine!.photo, placeholder: Image("default-task"))
-//                                .aspectRatio(contentMode: .fit)
-//                                .opacity(0.60)
-//                                .overlay(Image(systemName: "checkmark.circle")
-//                                    .font(.system(size:65))
-//                                    .padding(EdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0))
-//                                    .foregroundColor(.green))
-//                        } else {
-//                            AssetImage(urlName: self.goalOrRoutine!.photo, placeholder: Image("default-task"))
-//                                .aspectRatio(contentMode: .fit)
-//                        }
-                        
-                        
-//                        VStack{
-//                            Text(self.goalOrRoutine!.grTitle)
-//                                .fontWeight(.bold)
-//                                .lineLimit(nil)
-//                                .font(.system(size: 18, design: .rounded))
-//                            Text("Takes me " + self.goalOrRoutine!.expectedCompletionTime)
-//                                .fontWeight(.light)
-//                                .font(.system(size: 12, design: .rounded))
-//                        }
                         Spacer()
                         if(!self.done && self.goalOrRoutine!.isComplete.lowercased() == "true"){
                             RoundedRectangle(cornerSize: CGSize(width: 120, height: 30), style: .continuous)
@@ -466,48 +553,10 @@ struct newTaskView: View{
                     //new ui
                     ForEach(Array((self.model.goalsSubTasks[self.goalOrRoutine!.grUniqueID]!?.enumerated())!), id: \.offset){ index, item in
                         HStack {
-                            checkTaskView(task: (item as TaskAndActions), taskIndex: index, goal: goalOrRoutine)
+                            checkTaskView(task: (item as TaskAndActions), taskIndex: index, goal: goalOrRoutine, grIndex: self.goalOrRoutineIndex)
                         }
                     }
-//                    ForEach(Array((self.model.goalsSubTasks[self.goalOrRoutine!.grUniqueID]!?.enumerated())!), id: \.offset){ index, item in
-//
-//                        HStack (spacing: 3) {
-//                            Button {
-//                                print("checkbox pressed")
-//                                checked = !checked
-//                            }
-//                            label: {
-//                                if (checked) {
-//                                    Image(systemName: "checkmark.circle")
-//                                        .frame(width: 30, height: 30, alignment: .center)
-//                                }
-//                                else
-//                                {
-//                                    Image(systemName: "circle")
-//                                        .frame(width: 30, height: 30, alignment: .center)
-//                                }
-//                            }
-//                            .buttonStyle(PlainButtonStyle())
-//                            .frame(width: 30, height: 30, alignment: .leading)
-//
-//                            NavigationLink(destination: HomeView()){
-//                                HStack {
-//                                    checkTaskView(item: goalOrRoutine)
-//                                }
-//
-//                            }
-//                            .buttonStyle(PlainButtonStyle())
-//                        }
-//                    }
-                    //new ui
-                    
-//                    ForEach(Array((self.model.goalsSubTasks[self.goalOrRoutine!.grUniqueID]!?.enumerated())!), id: \.offset){ index, item in
-//                        VStack(alignment: .leading){
-//                            if(item.isAvailable.lowercased() == "true"){
-//                                newTaskItem(task: item, index: index , goalOrRoutineIndex: self.goalOrRoutineIndex!, goalOrRoutineID: self.goalOrRoutine?.grUniqueID, previousTaskIsComplete: ((index == 0) ? "True" : self.model.goalsSubTasks[self.goalOrRoutine!.grUniqueID]!![index-1].isComplete), fullDayArray: self.fullDayArray)
-//                            }
-//                        }
-//                    }
+
                     
                 }.frame(height: geo.size.height)
                 .padding(0)
