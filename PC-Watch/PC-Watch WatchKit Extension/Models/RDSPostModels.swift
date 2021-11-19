@@ -61,23 +61,15 @@ struct ActionTaskPostResp: Codable {
 
 // MARK: - InstrStepPost
 struct InstrStepPost: Codable {
-    var title, photo, photo_url, type, is_complete, is_available, is_in_progress, audio, is_timed,
-        expected_completion_time, is_id, is_sequence: String
-//    var isComplete: String
+    var id, datetimeCompleted, datetimeStarted, isInProgress: String
+    var isComplete: String
 
     enum CodingKeys: String, CodingKey {
-        case title
-        case photo
-        case photo_url
-        case type
-        case is_complete
-        case is_available
-        case is_in_progress
-        case audio
-        case is_timed
-        case expected_completion_time
-        case is_id
-        case is_sequence
+        case id
+        case datetimeCompleted = "datetime_completed"
+        case datetimeStarted = "datetime_started"
+        case isInProgress = "is_in_progress"
+        case isComplete = "is_complete"
     }
 }
 

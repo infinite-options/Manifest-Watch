@@ -497,6 +497,7 @@ struct checkStepView: View {
     var task: TaskAndActions?
     var taskIndex: Int?
     var goal: GoalRoutine?
+    var goalIndex: Int?
     var step: Steps?
     var stepIndex: Int?
     @ObservedObject var viewPick = ViewController.shared
@@ -537,22 +538,91 @@ struct checkStepView: View {
                 if (self.model.taskStepsLeft[self.task!.atUniqueID]! < (self.model.actionSteps[self.task!.atUniqueID]?!.count)! &&
                         self.model.taskStepsLeft[self.task!.atUniqueID]! > 0)
                 {
-//                        self.goal?.isInProgress = "True"
+                    if (self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete.lowercased() == "true")
+                    {
+                        self.model.goalSubtasksLeft[self.goal!.grUniqueID]! += 1
+                        
+                        if (self.model.goalSubtasksLeft[self.goal!.grUniqueID]! < (self.model.goalsSubTasks[self.goal!.grUniqueID]?!.count)!)
+                        {
+                            self.model.goalsRoutinesData![self.goalIndex!].isInProgress = "True"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isInProgress = "True"
+                            self.model.goalsRoutinesData![self.goalIndex!].isComplete = "False"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isComplete = "False"
+                            
+                            self.model.startGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
+                        }
+                        else //if none of the tasks are started
+                        {
+                            self.model.goalsRoutinesData![self.goalIndex!].isInProgress = "False"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isInProgress = "False"
+                            self.model.goalsRoutinesData![self.goalIndex!].isComplete = "False"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isComplete = "False"
+                            
+                            self.model.resetGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
+                        }
+                    }
+                    
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "True"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "False"
                     
                     self.model.startActionOrTask(actionTaskId: task!.atUniqueID)
+                    
+                    
                 }
                 else if (self.model.taskStepsLeft[self.task!.atUniqueID]! == 0)
                 {
+                    self.model.goalSubtasksLeft[self.goal!.grUniqueID]! -= 1
                     
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "False"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "True"
                     
                     self.model.completeActionOrTask(actionTaskId: task!.atUniqueID)
+                    
+                    if (self.model.goalSubtasksLeft[self.goal!.grUniqueID]! == 0) //if we finished all of the subtasks
+                    {
+                        self.model.goalsRoutinesData![self.goalIndex!].isInProgress = "False"
+                        self.model.goalsRoutinesBlockData![self.goalIndex!].isInProgress = "False"
+                        self.model.goalsRoutinesData![self.goalIndex!].isComplete = "True"
+                        self.model.goalsRoutinesBlockData![self.goalIndex!].isComplete = "True"
+                        
+                        self.model.completeGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
+                    }
+                    else //if there are still subtasks to finish
+                    {
+                        self.model.goalsRoutinesData![self.goalIndex!].isInProgress = "True"
+                        self.model.goalsRoutinesBlockData![self.goalIndex!].isInProgress = "True"
+                        self.model.goalsRoutinesData![self.goalIndex!].isComplete = "False"
+                        self.model.goalsRoutinesBlockData![self.goalIndex!].isComplete = "False"
+                        
+                        self.model.startGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
+                    }
                 }
                 else
                 {
+                    if (self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete.lowercased() == "true")
+                    {
+                        self.model.goalSubtasksLeft[self.goal!.grUniqueID]! += 1
+                        
+                        if (self.model.goalSubtasksLeft[self.goal!.grUniqueID]! < (self.model.goalsSubTasks[self.goal!.grUniqueID]?!.count)!)
+                        {
+                            self.model.goalsRoutinesData![self.goalIndex!].isInProgress = "True"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isInProgress = "True"
+                            self.model.goalsRoutinesData![self.goalIndex!].isComplete = "False"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isComplete = "False"
+                            
+                            self.model.startGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
+                        }
+                        else //if none of the tasks are started
+                        {
+                            self.model.goalsRoutinesData![self.goalIndex!].isInProgress = "False"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isInProgress = "False"
+                            self.model.goalsRoutinesData![self.goalIndex!].isComplete = "False"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isComplete = "False"
+                            
+                            self.model.resetGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
+                        }
+                    }
+                    
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "False"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "False"
                     
@@ -655,6 +725,30 @@ struct checkStepView: View {
                 if (self.model.taskStepsLeft[self.task!.atUniqueID]! < (self.model.actionSteps[self.task!.atUniqueID]?!.count)! &&
                         self.model.taskStepsLeft[self.task!.atUniqueID]! > 0)
                 {
+                    if (self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete.lowercased() == "true")
+                    {
+                        self.model.goalSubtasksLeft[self.goal!.grUniqueID]! += 1
+                        
+                        if (self.model.goalSubtasksLeft[self.goal!.grUniqueID]! < (self.model.goalsSubTasks[self.goal!.grUniqueID]?!.count)!)
+                        {
+                            self.model.goalsRoutinesData![self.goalIndex!].isInProgress = "True"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isInProgress = "True"
+                            self.model.goalsRoutinesData![self.goalIndex!].isComplete = "False"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isComplete = "False"
+                            
+                            self.model.startGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
+                        }
+                        else //if none of the tasks are started
+                        {
+                            self.model.goalsRoutinesData![self.goalIndex!].isInProgress = "False"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isInProgress = "False"
+                            self.model.goalsRoutinesData![self.goalIndex!].isComplete = "False"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isComplete = "False"
+                            
+                            self.model.resetGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
+                        }
+                    }
+                    
 //                        self.goal?.isInProgress = "True"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "True"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "False"
@@ -663,14 +757,59 @@ struct checkStepView: View {
                 }
                 else if (self.model.taskStepsLeft[self.task!.atUniqueID]! == 0)
                 {
+                    self.model.goalSubtasksLeft[self.goal!.grUniqueID]! -= 1
+                    
                     print("no steps left")
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "False"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "True"
                     
                     self.model.completeActionOrTask(actionTaskId: task!.atUniqueID)
+                    
+                    if (self.model.goalSubtasksLeft[self.goal!.grUniqueID]! == 0) //if we finished all of the subtasks
+                    {
+                        self.model.goalsRoutinesData![self.goalIndex!].isInProgress = "False"
+                        self.model.goalsRoutinesBlockData![self.goalIndex!].isInProgress = "False"
+                        self.model.goalsRoutinesData![self.goalIndex!].isComplete = "True"
+                        self.model.goalsRoutinesBlockData![self.goalIndex!].isComplete = "True"
+                        
+                        self.model.completeGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
+                    }
+                    else //if there are still subtasks to finish
+                    {
+                        self.model.goalsRoutinesData![self.goalIndex!].isInProgress = "True"
+                        self.model.goalsRoutinesBlockData![self.goalIndex!].isInProgress = "True"
+                        self.model.goalsRoutinesData![self.goalIndex!].isComplete = "False"
+                        self.model.goalsRoutinesBlockData![self.goalIndex!].isComplete = "False"
+                        
+                        self.model.startGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
+                    }
                 }
                 else
                 {
+                    if (self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete.lowercased() == "true")
+                    {
+                        self.model.goalSubtasksLeft[self.goal!.grUniqueID]! += 1
+                        
+                        if (self.model.goalSubtasksLeft[self.goal!.grUniqueID]! < (self.model.goalsSubTasks[self.goal!.grUniqueID]?!.count)!)
+                        {
+                            self.model.goalsRoutinesData![self.goalIndex!].isInProgress = "True"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isInProgress = "True"
+                            self.model.goalsRoutinesData![self.goalIndex!].isComplete = "False"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isComplete = "False"
+                            
+                            self.model.startGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
+                        }
+                        else //if none of the tasks are started
+                        {
+                            self.model.goalsRoutinesData![self.goalIndex!].isInProgress = "False"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isInProgress = "False"
+                            self.model.goalsRoutinesData![self.goalIndex!].isComplete = "False"
+                            self.model.goalsRoutinesBlockData![self.goalIndex!].isComplete = "False"
+                            
+                            self.model.resetGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
+                        }
+                    }
+                    
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "False"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "False"
                     
@@ -707,10 +846,10 @@ struct newStepView: View{
                             Spacer()
                             stepInfoView(item: (self.chosenTask! as TaskAndActions?))
                                 .opacity(0.60)
-                                .overlay(Image(systemName: "checkmark.circle")
-                                    .font(.system(size:30))
-                                    .padding(EdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0))
-                                    .foregroundColor(.green))
+//                                .overlay(Image(systemName: "checkmark.circle")
+//                                    .font(.system(size:30))
+//                                    .padding(EdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0))
+//                                    .foregroundColor(.green))
                             Spacer()
                         }.frame(height: 50)
                         .background(Color(#colorLiteral(red: 1, green: 0.7411764706, blue: 0.1529411765, alpha: 1)))
@@ -762,10 +901,10 @@ struct newStepView: View{
                                 Spacer()
                                 stepInfoView(item: (self.chosenTask! as TaskAndActions?))
                                     .opacity(0.60)
-                                    .overlay(Image(systemName: "checkmark.circle")
-                                        .font(.system(size:30))
-                                        .padding(EdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0))
-                                        .foregroundColor(.green))
+//                                    .overlay(Image(systemName: "checkmark.circle")
+//                                        .font(.system(size:30))
+//                                        .padding(EdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0))
+//                                        .foregroundColor(.green))
                                 Spacer()
                             }.frame(height: 50)
                             .background(Color(#colorLiteral(red: 0.9725490196, green: 0.4196078431, blue: 0.2862745098, alpha: 1)))
@@ -777,10 +916,10 @@ struct newStepView: View{
                                 Spacer()
                                 stepInfoView(item: (self.chosenTask! as TaskAndActions?))
                                     .opacity(0.60)
-                                    .overlay(Image(systemName: "checkmark.circle")
-                                        .font(.system(size:30))
-                                        .padding(EdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0))
-                                        .foregroundColor(.green))
+//                                    .overlay(Image(systemName: "checkmark.circle")
+//                                        .font(.system(size:30))
+//                                        .padding(EdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0))
+//                                        .foregroundColor(.green))
                                 Spacer()
                             }.frame(height: 50)
                             .background(Color(#colorLiteral(red: 1, green: 0.7411764706, blue: 0.1529411765, alpha: 1)))
@@ -840,7 +979,7 @@ struct newStepView: View{
                     //new ui
                     ForEach(Array((self.model.actionSteps[self.chosenTask!.atUniqueID]!?.enumerated())!), id: \.offset){ index, item in
                         HStack {
-                            checkStepView(task: (self.chosenTask! as TaskAndActions?), taskIndex: self.taskIndex, goal: goalOrRoutine, step: item, stepIndex: index)
+                            checkStepView(task: (self.chosenTask! as TaskAndActions?), taskIndex: self.taskIndex, goal: goalOrRoutine, goalIndex: self.goalOrRoutineIndex, step: item, stepIndex: index)
                         }
                     }
 

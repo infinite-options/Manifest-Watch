@@ -17,7 +17,7 @@ struct LaunchScreenView: View {
     var body: some View {
         GeometryReader { geo in
             VStack{
-                Image("App Icon")
+                Image("ManifestMySpaceIcon")
                     .resizable()
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.white, lineWidth: 1))

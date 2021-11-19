@@ -596,13 +596,13 @@ class NetworkManager: ObservableObject {
         print("Inside complete step")
         
         guard let url = URL(string: "https://3s3sftsr90.execute-api.us-west-1.amazonaws.com/dev/api/v2/updateISWatchMobile") else { return }
-//        let defaultDateTimeCompleted = createTimeStamp()
+        let defaultDateTimeCompleted = createTimeStamp()
         let isInProgress = self.falseCase
         let isComplete = self.falseCase
         
         //var title, photo, photo_url, type, is_complete, is_available, is_in_progress, audio, is_timed,
         //expected_completion_time, is_id, is_sequence: String
-        let jsonData = InstrStepPost(title: step.isTitle, photo: "", photo_url: "", type: "step", is_complete: isComplete, is_available: step.isAvailable, is_in_progress: isInProgress, audio: "", is_timed: step.isTimed, expected_completion_time: step.isExpectedCompletionTime, is_id: step.isUniqueID, is_sequence: String(step.isSequence))
+        let jsonData = InstrStepPost(id: step.isUniqueID, datetimeCompleted: defaultDateTimeCompleted, datetimeStarted: "", isInProgress: isInProgress, isComplete: isComplete)
         
         let finalJsonData = try? JSONEncoder().encode(jsonData)
         
@@ -640,13 +640,13 @@ class NetworkManager: ObservableObject {
         print("Inside complete step")
         
         guard let url = URL(string: "https://3s3sftsr90.execute-api.us-west-1.amazonaws.com/dev/api/v2/updateISWatchMobile") else { return }
-//        let defaultDateTimeCompleted = createTimeStamp()
+        let defaultDateTimeCompleted = createTimeStamp()
         let isInProgress = self.trueCase
         let isComplete = self.falseCase
         
         //var title, photo, photo_url, type, is_complete, is_available, is_in_progress, audio, is_timed,
         //expected_completion_time, is_id, is_sequence: String
-        let jsonData = InstrStepPost(title: step.isTitle, photo: "", photo_url: "", type: "step", is_complete: isComplete, is_available: step.isAvailable, is_in_progress: isInProgress, audio: "n/a", is_timed: step.isTimed, expected_completion_time: step.isExpectedCompletionTime, is_id: step.isUniqueID, is_sequence: String(step.isSequence))
+        let jsonData = InstrStepPost(id: step.isUniqueID, datetimeCompleted: defaultDateTimeCompleted, datetimeStarted: "", isInProgress: isInProgress, isComplete: isComplete)
         
         
         let finalJsonData = try? JSONEncoder().encode(jsonData)
@@ -685,13 +685,13 @@ class NetworkManager: ObservableObject {
         print("Inside complete step")
         
         guard let url = URL(string: "https://3s3sftsr90.execute-api.us-west-1.amazonaws.com/dev/api/v2/updateISWatchMobile") else { return }
-//        let defaultDateTimeCompleted = createTimeStamp()
+        let defaultDateTimeCompleted = createTimeStamp()
         let isInProgress = self.falseCase
         let isComplete = self.trueCase
         
         //var title, photo, photo_url, type, is_complete, is_available, is_in_progress, audio, is_timed,
         //expected_completion_time, is_id, is_sequence: String
-        let jsonData = InstrStepPost(title: step.isTitle, photo: step.isPhoto, photo_url: step.isPhoto, type: "step", is_complete: isComplete, is_available: step.isAvailable, is_in_progress: isInProgress, audio: "na", is_timed: step.isTimed, expected_completion_time: step.isExpectedCompletionTime, is_id: step.isUniqueID, is_sequence: String(step.isSequence))
+        let jsonData = InstrStepPost(id: step.isUniqueID, datetimeCompleted: defaultDateTimeCompleted, datetimeStarted: "", isInProgress: isInProgress, isComplete: isComplete)
         
         let finalJsonData = try? JSONEncoder().encode(jsonData)
         
