@@ -142,6 +142,8 @@ struct checkTaskView: View {
                     self.model.goalSubtasksLeft[self.goal!.grUniqueID]? += 1
                     if (self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isMustDo.lowercased() == "true")
                     { self.model.isMustDoTasks[self.goal!.grUniqueID]? += 1 }
+                    
+                    self.model.resetActionOrTask(actionTaskId: task!.atUniqueID)
                 }
                 else
                 {
@@ -149,6 +151,8 @@ struct checkTaskView: View {
                     self.model.goalSubtasksLeft[self.goal!.grUniqueID]? -= 1
                     if (self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isMustDo.lowercased() == "true")
                     { self.model.isMustDoTasks[self.goal!.grUniqueID]? -= 1 }
+                    
+                    self.model.completeActionOrTask(actionTaskId: task!.atUniqueID)
                 }
                 
                 self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isInProgress = "False"
@@ -161,6 +165,8 @@ struct checkTaskView: View {
                     self.model.goalsRoutinesBlockData![self.grIndex!].isInProgress = "True"
                     self.model.goalsRoutinesData![self.grIndex!].isComplete = "False"
                     self.model.goalsRoutinesBlockData![self.grIndex!].isComplete = "False"
+                    
+                    self.model.startGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
                 }
                 else if (self.model.goalSubtasksLeft[self.goal!.grUniqueID]! == 0)
                 {
@@ -168,6 +174,8 @@ struct checkTaskView: View {
                     self.model.goalsRoutinesBlockData![self.grIndex!].isInProgress = "False"
                     self.model.goalsRoutinesData![self.grIndex!].isComplete = "True"
                     self.model.goalsRoutinesBlockData![self.grIndex!].isComplete = "True"
+                    
+                    self.model.completeGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
                 }
                 else
                 {
@@ -175,6 +183,8 @@ struct checkTaskView: View {
                     self.model.goalsRoutinesBlockData![self.grIndex!].isInProgress = "False"
                     self.model.goalsRoutinesData![self.grIndex!].isComplete = "False"
                     self.model.goalsRoutinesBlockData![self.grIndex!].isComplete = "False"
+                    
+                    self.model.resetGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
                 }
 //                isMustDoTasks
             }
@@ -319,6 +329,13 @@ struct checkTaskView: View {
                         self.model.goalSubtasksLeft[self.goal!.grUniqueID]? += 1
                         if (self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isMustDo.lowercased() == "true")
                         { self.model.isMustDoTasks[self.goal!.grUniqueID]? += 1 }
+                        
+                        self.model.resetActionOrTask(actionTaskId: task!.atUniqueID)
+//                        //no subtasks have been started for the goal
+//                        if (self.model.goalSubtasksLeft[self.goal!.grUniqueID]! == self.model.goalsSubTasks[self.goal!.grUniqueID]!!.count)
+//                        {
+//
+//                        }
                     }
                     else
                     {
@@ -326,6 +343,8 @@ struct checkTaskView: View {
                         self.model.goalSubtasksLeft[self.goal!.grUniqueID]? -= 1
                         if (self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isMustDo.lowercased() == "true")
                         { self.model.isMustDoTasks[self.goal!.grUniqueID]? -= 1 }
+                        
+                        self.model.completeActionOrTask(actionTaskId: task!.atUniqueID)
                     }
                     
                     self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isInProgress = "False"
@@ -338,6 +357,8 @@ struct checkTaskView: View {
                         self.model.goalsRoutinesBlockData![self.grIndex!].isInProgress = "True"
                         self.model.goalsRoutinesData![self.grIndex!].isComplete = "False"
                         self.model.goalsRoutinesBlockData![self.grIndex!].isComplete = "False"
+                        
+                        self.model.startGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
                     }
                     else if (self.model.goalSubtasksLeft[self.goal!.grUniqueID]! == 0)
                     {
@@ -345,6 +366,8 @@ struct checkTaskView: View {
                         self.model.goalsRoutinesBlockData![self.grIndex!].isInProgress = "False"
                         self.model.goalsRoutinesData![self.grIndex!].isComplete = "True"
                         self.model.goalsRoutinesBlockData![self.grIndex!].isComplete = "True"
+                        
+                        self.model.completeGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
                     }
                     else
                     {
@@ -352,6 +375,8 @@ struct checkTaskView: View {
                         self.model.goalsRoutinesBlockData![self.grIndex!].isInProgress = "False"
                         self.model.goalsRoutinesData![self.grIndex!].isComplete = "False"
                         self.model.goalsRoutinesBlockData![self.grIndex!].isComplete = "False"
+                        
+                        self.model.resetGoalOrRoutine(goalRoutineId: self.goal!.grUniqueID)
                     }
                 }
                 

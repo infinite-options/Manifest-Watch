@@ -521,11 +521,15 @@ struct checkStepView: View {
                 {
                     self.model.actionSteps[self.task!.atUniqueID]??[stepIndex!].isComplete = "False"
                     self.model.taskStepsLeft[self.task!.atUniqueID]? += 1
+                    
+                    self.model.resetStep(step: self.step!)
                 }
                 else
                 {
                     self.model.actionSteps[self.task!.atUniqueID]??[stepIndex!].isComplete = "True"
                     self.model.taskStepsLeft[self.task!.atUniqueID]? -= 1
+                    
+                    self.model.completeStep(step: self.step!)
                 }
                 
                 self.model.actionSteps[self.task!.atUniqueID]??[stepIndex!].isInProgress = "False"
@@ -536,17 +540,23 @@ struct checkStepView: View {
 //                        self.goal?.isInProgress = "True"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "True"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "False"
+                    
+                    self.model.startActionOrTask(actionTaskId: task!.atUniqueID)
                 }
                 else if (self.model.taskStepsLeft[self.task!.atUniqueID]! == 0)
                 {
                     
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "False"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "True"
+                    
+                    self.model.completeActionOrTask(actionTaskId: task!.atUniqueID)
                 }
                 else
                 {
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "False"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "False"
+                    
+                    self.model.resetActionOrTask(actionTaskId: task!.atUniqueID)
                 }
 //                isMustDoTasks
             }
@@ -627,11 +637,15 @@ struct checkStepView: View {
                 {
                     self.model.actionSteps[self.task!.atUniqueID]??[stepIndex!].isComplete = "False"
                     self.model.taskStepsLeft[self.task!.atUniqueID]? += 1
+                    
+                    self.model.resetStep(step: self.step!)
                 }
                 else
                 {
                     self.model.actionSteps[self.task!.atUniqueID]??[stepIndex!].isComplete = "True"
                     self.model.taskStepsLeft[self.task!.atUniqueID]? -= 1
+                    
+                    self.model.completeStep(step: self.step!)
                 }
                 
                 print("steps left: \(self.model.taskStepsLeft[self.task!.atUniqueID]!)")
@@ -644,17 +658,23 @@ struct checkStepView: View {
 //                        self.goal?.isInProgress = "True"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "True"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "False"
+                    
+                    self.model.startActionOrTask(actionTaskId: task!.atUniqueID)
                 }
                 else if (self.model.taskStepsLeft[self.task!.atUniqueID]! == 0)
                 {
                     print("no steps left")
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "False"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "True"
+                    
+                    self.model.completeActionOrTask(actionTaskId: task!.atUniqueID)
                 }
                 else
                 {
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isInProgress = "False"
                     self.model.goalsSubTasks[self.goal!.grUniqueID]!![self.taskIndex!].isComplete = "False"
+                    
+                    self.model.resetActionOrTask(actionTaskId: task!.atUniqueID)
                 }
             }
             

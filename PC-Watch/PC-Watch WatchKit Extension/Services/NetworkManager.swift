@@ -348,6 +348,46 @@ class NetworkManager: ObservableObject {
             }
         .resume()
     }
+    
+    func resetGoalOrRoutine(goalRoutineId: String) {
+        print("Inside start goal or routine")
+        
+        guard let url = URL(string: "https://3s3sftsr90.execute-api.us-west-1.amazonaws.com/dev/api/v2/udpateGRWatchMobile") else { return }
+        let defaultDateTimeStarted = createTimeStamp()
+        let isInProgress = self.falseCase
+        let isComplete = self.falseCase
+        
+        
+        let jsonData = GoalRoutinePost(id: goalRoutineId, datetimeCompleted: "", datetimeStarted: defaultDateTimeStarted, isInProgress: isInProgress, isComplete: isComplete)
+        
+        let finalJsonData = try? JSONEncoder().encode(jsonData)
+        
+        print(finalJsonData!)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = finalJsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        URLSession.shared.dataTask(with: request){ (data, _ , error) in
+            if let error = error {
+                print("Generic networking error: \(error)")
+            }
+
+            if let data = data {
+                do{
+                    let finalRespData = try JSONDecoder().decode(GoalRoutinePostResp.self, from: data)
+                    print(finalRespData)
+                }
+                catch let jsonParseError {
+                    print("Error in parsing JSON response: \(jsonParseError)")
+                }
+            }
+            else { return }
+        }.resume()
+    }
+    
     func startGoalOrRoutine(goalRoutineId: String) {
         print("Inside start goal or routine")
         
@@ -424,20 +464,23 @@ class NetworkManager: ObservableObject {
             else { return }
         }.resume()
     }
-    func completeActionOrTask(actionTaskId: String) {
+    
+    
+    func resetActionOrTask(actionTaskId: String) {
         print("Inside complete action or task")
         
         guard let url = URL(string: "https://3s3sftsr90.execute-api.us-west-1.amazonaws.com/dev/api/v2/updateATWatchMobile") else { return }
         let defaultDateTimeCompleted = createTimeStamp()
         let isInProgress = self.falseCase
-        let isComplete = self.trueCase
+        let isComplete = self.falseCase
         
         
         let jsonData = ActionTaskPost(id: actionTaskId, datetimeCompleted: defaultDateTimeCompleted, datetimeStarted: "", isInProgress: isInProgress, isComplete: isComplete)
         
         let finalJsonData = try? JSONEncoder().encode(jsonData)
         
-        print(finalJsonData!)
+        print("printing task json obj")
+        print("printing task json obj: \(finalJsonData!)")
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -462,6 +505,226 @@ class NetworkManager: ObservableObject {
             else { return }
         }.resume()
     }
+    
+    func startActionOrTask(actionTaskId: String) {
+        print("Inside complete action or task")
+        
+        guard let url = URL(string: "https://3s3sftsr90.execute-api.us-west-1.amazonaws.com/dev/api/v2/updateATWatchMobile") else { return }
+        let defaultDateTimeCompleted = createTimeStamp()
+        let isInProgress = self.trueCase
+        let isComplete = self.falseCase
+        
+        
+        let jsonData = ActionTaskPost(id: actionTaskId, datetimeCompleted: defaultDateTimeCompleted, datetimeStarted: "", isInProgress: isInProgress, isComplete: isComplete)
+        
+        let finalJsonData = try? JSONEncoder().encode(jsonData)
+        
+        print("printing task json obj")
+//        print(finalJsonData!)
+        print("printing task json obj: \(finalJsonData!)")
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = finalJsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        URLSession.shared.dataTask(with: request){ (data, _ , error) in
+            if let error = error {
+                print("Generic networking error: \(error)")
+            }
+
+            if let data = data {
+                do{
+                    let finalRespData = try JSONDecoder().decode(ActionTaskPostResp.self, from: data)
+                    print(finalRespData)
+                }
+                catch let jsonParseError {
+                    print("Error in parsing JSON response: \(jsonParseError)")
+                }
+            }
+            else { return }
+        }.resume()
+    }
+    
+    func completeActionOrTask(actionTaskId: String) {
+        print("Inside complete action or task")
+        
+        guard let url = URL(string: "https://3s3sftsr90.execute-api.us-west-1.amazonaws.com/dev/api/v2/updateATWatchMobile") else { return }
+        let defaultDateTimeCompleted = createTimeStamp()
+        let isInProgress = self.falseCase
+        let isComplete = self.trueCase
+        
+        
+        let jsonData = ActionTaskPost(id: actionTaskId, datetimeCompleted: defaultDateTimeCompleted, datetimeStarted: "", isInProgress: isInProgress, isComplete: isComplete)
+        
+        let finalJsonData = try? JSONEncoder().encode(jsonData)
+        
+//        print("just jsonData: \(jsonData!)
+        print("printing task json obj")
+//        print(finalJsonData!)
+//        print("printing task json obj: \(finalJsonData!)")
+        if let JSONString = String(data: finalJsonData!, encoding: String.Encoding.utf8) {
+           print(JSONString)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = finalJsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        URLSession.shared.dataTask(with: request){ (data, _ , error) in
+            if let error = error {
+                print("Generic networking error: \(error)")
+            }
+
+            if let data = data {
+                do{
+                    let finalRespData = try JSONDecoder().decode(ActionTaskPostResp.self, from: data)
+                    print(finalRespData)
+                }
+                catch let jsonParseError {
+                    print("Error in parsing JSON response: \(jsonParseError)")
+                }
+            }
+            else { return }
+        }.resume()
+    }
+    
+    func resetStep(step: Steps) {
+        print("Inside complete step")
+        
+        guard let url = URL(string: "https://3s3sftsr90.execute-api.us-west-1.amazonaws.com/dev/api/v2/updateISWatchMobile") else { return }
+//        let defaultDateTimeCompleted = createTimeStamp()
+        let isInProgress = self.falseCase
+        let isComplete = self.falseCase
+        
+        //var title, photo, photo_url, type, is_complete, is_available, is_in_progress, audio, is_timed,
+        //expected_completion_time, is_id, is_sequence: String
+        let jsonData = InstrStepPost(title: step.isTitle, photo: "", photo_url: "", type: "step", is_complete: isComplete, is_available: step.isAvailable, is_in_progress: isInProgress, audio: "", is_timed: step.isTimed, expected_completion_time: step.isExpectedCompletionTime, is_id: step.isUniqueID, is_sequence: String(step.isSequence))
+        
+        let finalJsonData = try? JSONEncoder().encode(jsonData)
+        
+        print("printing steps json obj")
+//        print(finalJsonData!)
+        if let JSONString = String(data: finalJsonData!, encoding: String.Encoding.utf8) {
+           print(JSONString)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = finalJsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        URLSession.shared.dataTask(with: request){ (data, _ , error) in
+            if let error = error {
+                print("Generic networking error: \(error)")
+            }
+
+            if let data = data {
+                do{
+                    let finalRespData = try JSONDecoder().decode(InstrStepPostResp.self, from: data)
+                    print(finalRespData)
+                }
+                catch let jsonParseError {
+                    print("Error in parsing JSON response: \(jsonParseError)")
+                }
+            }
+            else { return }
+        }.resume()
+    }
+    
+    func startStep(step: Steps) {
+        print("Inside complete step")
+        
+        guard let url = URL(string: "https://3s3sftsr90.execute-api.us-west-1.amazonaws.com/dev/api/v2/updateISWatchMobile") else { return }
+//        let defaultDateTimeCompleted = createTimeStamp()
+        let isInProgress = self.trueCase
+        let isComplete = self.falseCase
+        
+        //var title, photo, photo_url, type, is_complete, is_available, is_in_progress, audio, is_timed,
+        //expected_completion_time, is_id, is_sequence: String
+        let jsonData = InstrStepPost(title: step.isTitle, photo: "", photo_url: "", type: "step", is_complete: isComplete, is_available: step.isAvailable, is_in_progress: isInProgress, audio: "n/a", is_timed: step.isTimed, expected_completion_time: step.isExpectedCompletionTime, is_id: step.isUniqueID, is_sequence: String(step.isSequence))
+        
+        
+        let finalJsonData = try? JSONEncoder().encode(jsonData)
+        
+        print("printing steps json obj")
+//        print(finalJsonData!)
+        if let JSONString = String(data: finalJsonData!, encoding: String.Encoding.utf8) {
+           print(JSONString)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = finalJsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        URLSession.shared.dataTask(with: request){ (data, _ , error) in
+            if let error = error {
+                print("Generic networking error: \(error)")
+            }
+
+            if let data = data {
+                do{
+                    let finalRespData = try JSONDecoder().decode(InstrStepPostResp.self, from: data)
+                    print(finalRespData)
+                }
+                catch let jsonParseError {
+                    print("Error in parsing JSON response: \(jsonParseError)")
+                }
+            }
+            else { return }
+        }.resume()
+    }
+    
+    func completeStep(step: Steps) {
+        print("Inside complete step")
+        
+        guard let url = URL(string: "https://3s3sftsr90.execute-api.us-west-1.amazonaws.com/dev/api/v2/updateISWatchMobile") else { return }
+//        let defaultDateTimeCompleted = createTimeStamp()
+        let isInProgress = self.falseCase
+        let isComplete = self.trueCase
+        
+        //var title, photo, photo_url, type, is_complete, is_available, is_in_progress, audio, is_timed,
+        //expected_completion_time, is_id, is_sequence: String
+        let jsonData = InstrStepPost(title: step.isTitle, photo: step.isPhoto, photo_url: step.isPhoto, type: "step", is_complete: isComplete, is_available: step.isAvailable, is_in_progress: isInProgress, audio: "na", is_timed: step.isTimed, expected_completion_time: step.isExpectedCompletionTime, is_id: step.isUniqueID, is_sequence: String(step.isSequence))
+        
+        let finalJsonData = try? JSONEncoder().encode(jsonData)
+        
+        print("printing steps json obj")
+//        print(finalJsonData!)
+        if let JSONString = String(data: finalJsonData!, encoding: String.Encoding.utf8) {
+           print(JSONString)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = finalJsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        URLSession.shared.dataTask(with: request){ (data, _ , error) in
+            if let error = error {
+                print("Generic networking error: \(error)")
+            }
+
+            if let data = data {
+                do{
+                    let finalRespData = try JSONDecoder().decode(InstrStepPostResp.self, from: data)
+                    print(finalRespData)
+                }
+                catch let jsonParseError {
+                    print("Error in parsing JSON response: \(jsonParseError)")
+                }
+            }
+            else { return }
+        }.resume()
+    }
+    
     func createTimeStamp() -> String{
         //Useful linkg for datetime formatting -> https://www.datetimeformatter.com/how-to-format-date-time-in-swift/
         

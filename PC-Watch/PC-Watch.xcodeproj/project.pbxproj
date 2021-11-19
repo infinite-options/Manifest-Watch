@@ -174,6 +174,8 @@
 		80262646252531E800BBD6E5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		8026264E2525330B00BBD6E5 /* ImportantPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantPeople.swift; sourceTree = "<group>"; };
 		A35DF1A3273D8BA900744FBA /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
+		A3B4063A2745B49500A13B53 /* PC-Watch WatchKit AppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PC-Watch WatchKit AppDebug.entitlements"; sourceTree = "<group>"; };
+		A3B4063B2745B4D200A13B53 /* PC-Watch WatchKit AppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PC-Watch WatchKit AppRelease.entitlements"; sourceTree = "<group>"; };
 		D70E07855FD8AF567D6A37E2 /* Pods-PC-Watch WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PC-Watch WatchKit App.debug.xcconfig"; path = "Target Support Files/Pods-PC-Watch WatchKit App/Pods-PC-Watch WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
 		F818EFB7EF1A5F81120871A6 /* Pods-PC-Watch WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PC-Watch WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-PC-Watch WatchKit Extension/Pods-PC-Watch WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		FD31FDA4F7659FBBD3ECB380 /* Pods-PC-Watch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PC-Watch.release.xcconfig"; path = "Target Support Files/Pods-PC-Watch/Pods-PC-Watch.release.xcconfig"; sourceTree = "<group>"; };
@@ -242,6 +244,8 @@
 		27BF9DB9243BD385006A5466 /* PC-Watch WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
+				A3B4063B2745B4D200A13B53 /* PC-Watch WatchKit AppRelease.entitlements */,
+				A3B4063A2745B49500A13B53 /* PC-Watch WatchKit AppDebug.entitlements */,
 				27BF9DBA243BD385006A5466 /* Interface.storyboard */,
 				27BF9DBD243BD389006A5466 /* Assets.xcassets */,
 				27BF9DBF243BD389006A5466 /* Info.plist */,
@@ -791,7 +795,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.21;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.infiniteoptions.caitlinwatch.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -821,7 +825,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.21;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.infiniteoptions.caitlinwatch.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -839,13 +843,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = MySpaceAppIcon;
+				CODE_SIGN_ENTITLEMENTS = "PC-Watch WatchKit App/PC-Watch WatchKit AppDebug.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				IBSC_MODULE = PC_Watch_WatchKit_Extension;
 				INFOPLIST_FILE = "PC-Watch WatchKit App/Info.plist";
-				MARKETING_VERSION = 1.0.21;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.infiniteoptions.caitlinwatch.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -863,13 +868,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = MySpaceAppIcon;
+				CODE_SIGN_ENTITLEMENTS = "PC-Watch WatchKit App/PC-Watch WatchKit AppRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				IBSC_MODULE = PC_Watch_WatchKit_Extension;
 				INFOPLIST_FILE = "PC-Watch WatchKit App/Info.plist";
-				MARKETING_VERSION = 1.0.21;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.infiniteoptions.caitlinwatch.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -889,7 +895,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
-				MARKETING_VERSION = 1.0.21;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.infiniteoptions.caitlinwatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -905,7 +911,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
-				MARKETING_VERSION = 1.0.21;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.infiniteoptions.caitlinwatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
