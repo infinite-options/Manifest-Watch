@@ -11,6 +11,7 @@ import ClockKit
 class ComplicationController: NSObject, CLKComplicationDataSource {
         
     let model = UserManager.shared
+    let networkModel = NetworkManager.shared
 
     // MARK: - Timeline Configuration
     
@@ -93,7 +94,58 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 handler(nil)
             }
         } else if complication.family == .graphicRectangular {
-            let userDay = model.UserDayData
+            print("entered getCurrentTimelineEntry with graphic rectangular")
+            
+            var chosenGR : GoalRoutine?
+            var unfinishedGR : GoalRoutine?
+            if (self.networkModel.goalsRoutinesData != nil && self.networkModel.goalsRoutinesData!.count > 0)
+            {
+                for goal in self.networkModel.goalsRoutinesData!
+                {
+                    if (goal.isInProgress.lowercased() == "true")
+                    {
+                        chosenGR = goal;
+                        break;
+                    }
+                    else if (goal.isInProgress.lowercased() == "false" && goal.isComplete.lowercased() == "false" && unfinishedGR == nil)
+                    {
+                        unfinishedGR = goal;
+                    }
+                }
+            }
+            
+            let graphicRectangular = CLKComplicationTemplateGraphicRectangularStandardBody()
+            graphicRectangular.headerTextProvider = CLKSimpleTextProvider(text: "All Goals Completed")
+            graphicRectangular.body1TextProvider = CLKSimpleTextProvider(text: "---")
+            graphicRectangular.body2TextProvider = CLKSimpleTextProvider(text: "---")
+            if (chosenGR != nil)
+            {
+                print("in progress goal chosen")
+                graphicRectangular.headerTextProvider = CLKSimpleTextProvider(text: chosenGR!.grTitle)
+                graphicRectangular.body1TextProvider = CLKSimpleTextProvider(text: "In Progress")
+                graphicRectangular.body2TextProvider = CLKSimpleTextProvider(text: "takes " + chosenGR!.expectedCompletionTime + " min")
+            }
+            else if (unfinishedGR != nil)
+            {
+                print("not started goal chosen")
+                graphicRectangular.headerTextProvider = CLKSimpleTextProvider(text: unfinishedGR!.grTitle)
+                graphicRectangular.body1TextProvider = CLKSimpleTextProvider(text: "Not Started")
+                graphicRectangular.body2TextProvider = CLKSimpleTextProvider(text: "takes " + unfinishedGR!.expectedCompletionTime + " min")
+            }
+            else
+            {
+                graphicRectangular.headerTextProvider = CLKSimpleTextProvider(text: "All Goals Completed")
+                graphicRectangular.body1TextProvider = CLKSimpleTextProvider(text: "---")
+                graphicRectangular.body2TextProvider = CLKSimpleTextProvider(text: "---")
+            }
+            
+            let holder = Date()
+            let template = graphicRectangular
+            let timelineEntry = CLKComplicationTimelineEntry(date: holder, complicationTemplate: template)
+            handler(timelineEntry)
+            //timeLineEntries.append(timelineEntry)
+            
+            /*let userDay = model.UserDayData
             if userDay.count > 0 {
                 print("Date ", Date())
                 if userDay[0] is Event {
@@ -149,35 +201,53 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                 }
             } else {
                 handler(nil)
-            }
+            }*/
+            
         } else if complication.family == .circularSmall {
             let circularSmall = CLKComplicationTemplateCircularSmallSimpleImage()
-            circularSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Circular")!)
+            circularSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named:
+                //self.networkModel.globalManifestIcon)!)
+                "Complication/Circular")!)
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: circularSmall)
             handler(timelineEntry)
         } else if complication.family == .graphicCircular {
+            print("graphic circular")
             let graphicCircular = CLKComplicationTemplateGraphicCircularImage()
-            graphicCircular.imageProvider = CLKFullColorImageProvider(fullColorImage: UIImage(named: "Complication/Graphic Circular")!)
+            graphicCircular.imageProvider = CLKFullColorImageProvider(fullColorImage: UIImage(named:
+                //self.networkModel.globalManifestIcon)!)
+                "Complication/Graphic Circular")!)
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: graphicCircular)
             handler(timelineEntry)
         } else if complication.family == .modularSmall {
+            print("modular small")
             let modularSmall = CLKComplicationTemplateModularSmallSimpleImage()
-            modularSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Modular")!)
+            modularSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named:
+                self.networkModel.globalManifestIcon)!)
+                //"Complication/Modular")!)
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: modularSmall)
             handler(timelineEntry)
         } else if complication.family == .utilitarianSmall {
+            print("utilitarian small")
             let utilitarianSmall = CLKComplicationTemplateUtilitarianSmallSquare()
-            utilitarianSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Utilitarian")!)
+            utilitarianSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named:
+                self.networkModel.globalManifestIcon)!)
+                //"Complication/Utilitarian")!)
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: utilitarianSmall)
             handler(timelineEntry)
         } else if complication.family == .extraLarge {
+            print("extra large")
             let extraLarge = CLKComplicationTemplateExtraLargeSimpleImage()
-            extraLarge.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Extra Large")!)
+            extraLarge.imageProvider = CLKImageProvider(onePieceImage: UIImage(named:
+                self.networkModel.globalManifestIcon)!)
+                //"Complication/Extra Large")!)
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: extraLarge)
             handler(timelineEntry)
         } else if complication.family == .graphicCorner {
+            print("graphic corner")
             let graphicCorner = CLKComplicationTemplateGraphicCornerCircularImage()
-            graphicCorner.imageProvider = CLKFullColorImageProvider(fullColorImage: UIImage(named: "Complication/Graphic Corner")!)
+            graphicCorner.imageProvider = CLKFullColorImageProvider(fullColorImage: UIImage(named:
+                self.networkModel.globalManifestIcon)!)
+                //"Complication/Graphic Corner")!)
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: graphicCorner)
             handler(timelineEntry)
         } else {
@@ -271,9 +341,57 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             }
             handler(timeLineEntries)
         } else if complication.family == .graphicRectangular {
+            print("entered getTimelineEntries with graphic rectangular")
             let userDay = model.UserDayData
             var timeLineEntries = [CLKComplicationTimelineEntry]()
-            if (userDay.count > 0) {
+            var chosenGR : GoalRoutine?
+            var unfinishedGR : GoalRoutine?
+            if (self.networkModel.goalsRoutinesData != nil && self.networkModel.goalsRoutinesData!.count > 0)
+            {
+                for goal in self.networkModel.goalsRoutinesData!
+                {
+                    if (goal.isInProgress.lowercased() == "true")
+                    {
+                        chosenGR = goal;
+                        break;
+                    }
+                    else if (goal.isInProgress.lowercased() == "false" && goal.isComplete.lowercased() == "false" && unfinishedGR == nil)
+                    {
+                        unfinishedGR = goal;
+                    }
+                }
+            }
+            
+            let graphicRectangular = CLKComplicationTemplateGraphicRectangularStandardBody()
+            graphicRectangular.headerTextProvider = CLKSimpleTextProvider(text: "All Goals Completed")
+            graphicRectangular.body1TextProvider = CLKSimpleTextProvider(text: "---")
+            graphicRectangular.body2TextProvider = CLKSimpleTextProvider(text: "---")
+            if (chosenGR != nil)
+            {
+                print("in progress goal chosen")
+                graphicRectangular.headerTextProvider = CLKSimpleTextProvider(text: chosenGR!.grTitle)
+                graphicRectangular.body1TextProvider = CLKSimpleTextProvider(text: "In Progress")
+                graphicRectangular.body2TextProvider = CLKSimpleTextProvider(text: "takes " + chosenGR!.expectedCompletionTime + " min")
+            }
+            else if (unfinishedGR != nil)
+            {
+                print("not started goal chosen")
+                graphicRectangular.headerTextProvider = CLKSimpleTextProvider(text: unfinishedGR!.grTitle)
+                graphicRectangular.body1TextProvider = CLKSimpleTextProvider(text: "Not Started")
+                graphicRectangular.body2TextProvider = CLKSimpleTextProvider(text: "takes " + unfinishedGR!.expectedCompletionTime + " min")
+            }
+            else
+            {
+                graphicRectangular.headerTextProvider = CLKSimpleTextProvider(text: "All Goals Completed")
+                graphicRectangular.body1TextProvider = CLKSimpleTextProvider(text: "---")
+                graphicRectangular.body2TextProvider = CLKSimpleTextProvider(text: "---")
+            }
+            
+            let holder = Date()
+            let template = graphicRectangular
+            let timelineEntry = CLKComplicationTimelineEntry(date: holder, complicationTemplate: template)
+            timeLineEntries.append(timelineEntry)
+            /*if (userDay.count > 0) {
                 for index in 0...(userDay.count-2) {
                     if userDay[index] is Event {
                         var time: Date
@@ -348,46 +466,63 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
                         timeLineEntries.append(timelineEntry)
                     }
                 }
-            }
+            }*/
             handler(timeLineEntries)
         } else if complication.family == .circularSmall {
             let circularSmall = CLKComplicationTemplateCircularSmallSimpleImage()
-            circularSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Circular")!)
+            circularSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named:
+                //self.networkModel.globalManifestIcon)!)
+                "Complication/Circular")!)
             var timeLineEntries = [CLKComplicationTimelineEntry]()
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: circularSmall)
             timeLineEntries.append(timelineEntry)
             handler(timeLineEntries)
         } else if complication.family == .graphicCircular {
+            print("graphic circular")
             let graphicCircular = CLKComplicationTemplateGraphicCircularImage()
-            graphicCircular.imageProvider = CLKFullColorImageProvider(fullColorImage: UIImage(named: "Complication/Graphic Circular")!)
+            graphicCircular.imageProvider = CLKFullColorImageProvider(fullColorImage: UIImage(named:
+                //self.networkModel.globalManifestIcon)!)
+                "Complication/Graphic Circular")!)
             var timeLineEntries = [CLKComplicationTimelineEntry]()
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: graphicCircular)
             timeLineEntries.append(timelineEntry)
             handler(timeLineEntries)
         } else if complication.family == .modularSmall {
+            print("modular small")
             let modularSmall = CLKComplicationTemplateModularSmallSimpleImage()
-            modularSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Modular")!)
+            modularSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named:
+                self.networkModel.globalManifestIcon)!)
+                //"Complication/Modular")!)
             var timeLineEntries = [CLKComplicationTimelineEntry]()
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: modularSmall)
             timeLineEntries.append(timelineEntry)
             handler(timeLineEntries)
         } else if complication.family == .utilitarianSmall {
+            print("utilitarian small")
             let utilitarianSmall = CLKComplicationTemplateUtilitarianSmallSquare()
-            utilitarianSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Utilitarian")!)
+            utilitarianSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named:
+                self.networkModel.globalManifestIcon)!)
+                //"Complication/Utilitarian")!)
             var timeLineEntries = [CLKComplicationTimelineEntry]()
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: utilitarianSmall)
             timeLineEntries.append(timelineEntry)
             handler(timeLineEntries)
         } else if complication.family == .extraLarge {
+            print("extra large")
             let extraLarge = CLKComplicationTemplateExtraLargeSimpleImage()
-            extraLarge.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Extra Large")!)
+            extraLarge.imageProvider = CLKImageProvider(onePieceImage: UIImage(named:
+                self.networkModel.globalManifestIcon)!)
+                //"Complication/Extra Large")!)
             var timeLineEntries = [CLKComplicationTimelineEntry]()
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: extraLarge)
             timeLineEntries.append(timelineEntry)
             handler(timeLineEntries)
         } else if complication.family == .graphicCorner {
+            print("graphic corner")
             let graphicCorner = CLKComplicationTemplateGraphicCornerCircularImage()
-            graphicCorner.imageProvider = CLKFullColorImageProvider(fullColorImage: UIImage(named: "Complication/Graphic Corner")!)
+            graphicCorner.imageProvider = CLKFullColorImageProvider(fullColorImage: UIImage(named:
+                self.networkModel.globalManifestIcon)!)
+                //"Complication/Graphic Corner")!)
             var timeLineEntries = [CLKComplicationTimelineEntry]()
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: graphicCorner)
             timeLineEntries.append(timelineEntry)
@@ -400,42 +535,98 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     // MARK: - Placeholder Templates
     
     func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
+//        var chosenGR : GoalRoutine?
+//        if (self.networkModel.goalsRoutinesData != nil && self.networkModel.goalsRoutinesData!.count > 0)
+//        {
+//            for goal in self.networkModel.goalsRoutinesData!
+//            {
+//                if (goal.isComplete.lowercased() == "true")
+//                {
+//                    chosenGR = goal;
+//                    break;
+//                }
+//            }
+//        }
+        print("in getLocalizableSampleTemplate")
         // This method will be called once per supported complication, and the results will be cached
         if complication.family == .modularLarge{
+            print("modular large chosen")
             let modularLarge = CLKComplicationTemplateModularLargeStandardBody()
+//            if (chosenGR != nil)
+//            {
+//                modularLarge.headerTextProvider = CLKSimpleTextProvider(text: chosenGR!.grTitle)
+//                modularLarge.body1TextProvider = CLKSimpleTextProvider(text: "In Progress")
+//                modularLarge.body2TextProvider = CLKSimpleTextProvider(text: chosenGR!.expectedCompletionTime)
+//            }
+//            else
+//            {
+//                modularLarge.headerTextProvider = CLKSimpleTextProvider(text: "Goal/Routine")
+//                modularLarge.body1TextProvider = CLKSimpleTextProvider(text: "Status")
+//                modularLarge.body2TextProvider = CLKSimpleTextProvider(text: "Time - Time")
+//            }
             modularLarge.headerTextProvider = CLKSimpleTextProvider(text: "Goal/Routine")
             modularLarge.body1TextProvider = CLKSimpleTextProvider(text: "Status")
             modularLarge.body2TextProvider = CLKSimpleTextProvider(text: "Time - Time")
             handler(modularLarge)
         } else if complication.family == .graphicRectangular {
+            print("graphic rectangular chosen")
             let graphicRectangular = CLKComplicationTemplateGraphicRectangularStandardBody()
+//            graphicRectangular.headerTextProvider = CLKSimpleTextProvider(text: "Goal/Routine")
+//            graphicRectangular.body1TextProvider = CLKSimpleTextProvider(text: "Status")
+//            graphicRectangular.body2TextProvider = CLKSimpleTextProvider(text: "Time - Time")
+//            if (chosenGR != nil)
+//            {
+//                print("goal chosen")
+//                graphicRectangular.headerTextProvider = CLKSimpleTextProvider(text: chosenGR!.grTitle)
+//                graphicRectangular.body1TextProvider = CLKSimpleTextProvider(text: "In Progress")
+//                graphicRectangular.body2TextProvider = CLKSimpleTextProvider(text: chosenGR!.expectedCompletionTime)
+//            }
+//            else
+//            {
+//                graphicRectangular.headerTextProvider = CLKSimpleTextProvider(text: "Goal/Routine")
+//                graphicRectangular.body1TextProvider = CLKSimpleTextProvider(text: "Status")
+//                graphicRectangular.body2TextProvider = CLKSimpleTextProvider(text: "Time - Time")
+//            }
             graphicRectangular.headerTextProvider = CLKSimpleTextProvider(text: "Goal/Routine")
             graphicRectangular.body1TextProvider = CLKSimpleTextProvider(text: "Status")
             graphicRectangular.body2TextProvider = CLKSimpleTextProvider(text: "Time - Time")
             handler(graphicRectangular)
         } else if complication.family == .circularSmall {
             let circularSmall = CLKComplicationTemplateCircularSmallSimpleImage()
-            circularSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Circular")!)
+            circularSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named:
+                //self.networkModel.globalManifestIcon)!)
+                "Complication/Circular")!)
             handler(circularSmall)
         } else if complication.family == .graphicCircular {
+            print("graphic circular")
             let graphicCircular = CLKComplicationTemplateGraphicCircularImage()
-            graphicCircular.imageProvider = CLKFullColorImageProvider(fullColorImage: UIImage(named: "Complication/Graphic Circular")!)
+            graphicCircular.imageProvider = CLKFullColorImageProvider(fullColorImage: UIImage(named:
+                //self.networkModel.globalManifestIcon)!)
+                "Complication/Graphic Circular")!)
             handler(graphicCircular)
         } else if complication.family == .modularSmall {
+            print("modular small")
             let modularSmall = CLKComplicationTemplateModularSmallSimpleImage()
-            modularSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Modular")!)
+            modularSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: self.networkModel.globalManifestIcon)!)
+                //"Complication/Modular")!)
             handler(modularSmall)
         } else if complication.family == .utilitarianSmall {
+            print("utilitarian small")
             let utilitarianSmall = CLKComplicationTemplateUtilitarianSmallSquare()
-            utilitarianSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Utilitarian")!)
+            utilitarianSmall.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: self.networkModel.globalManifestIcon)!)
+                //"Complication/Utilitarian")!)
             handler(utilitarianSmall)
         } else if complication.family == .extraLarge {
+            print("extra large")
             let extraLarge = CLKComplicationTemplateExtraLargeSimpleImage()
-            extraLarge.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: "Complication/Extra Large")!)
+            extraLarge.imageProvider = CLKImageProvider(onePieceImage: UIImage(named: self.networkModel.globalManifestIcon)!)
+                //"Complication/Extra Large")!)
             handler(extraLarge)
         } else if complication.family == .graphicCorner {
+            print("graphic corner")
             let graphicCorner = CLKComplicationTemplateGraphicCornerCircularImage()
-            graphicCorner.imageProvider = CLKFullColorImageProvider(fullColorImage: UIImage(named: "Complication/Graphic Circular")!)
+            graphicCorner.imageProvider = CLKFullColorImageProvider(fullColorImage: UIImage(named: self.networkModel.globalManifestIcon)!)
+                //"Complication/Graphic Circular")!)
             handler(graphicCorner)
         } else {
             handler(nil)

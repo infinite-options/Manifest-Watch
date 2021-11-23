@@ -123,7 +123,7 @@
 		04C6C501250BF8430021B4F4 /* CircularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularView.swift; sourceTree = "<group>"; };
 		04C6CC4124D9A87A0054E637 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		243E19C8209DBDA29F4C5A8D /* Pods-PC-Watch WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PC-Watch WatchKit App.release.xcconfig"; path = "Target Support Files/Pods-PC-Watch WatchKit App/Pods-PC-Watch WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
-		27BF9DB1243BD385006A5466 /* PC-Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PC-Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		27BF9DB1243BD385006A5466 /* Manifest My Space.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Manifest My Space.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27BF9DB5243BD385006A5466 /* PC-Watch WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PC-Watch WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27BF9DBB243BD385006A5466 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		27BF9DBD243BD389006A5466 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 		27BF9DB2243BD385006A5466 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				27BF9DB1243BD385006A5466 /* PC-Watch.app */,
+				27BF9DB1243BD385006A5466 /* Manifest My Space.app */,
 				27BF9DB5243BD385006A5466 /* PC-Watch WatchKit App.app */,
 				27BF9DC4243BD389006A5466 /* PC-Watch WatchKit Extension.appex */,
 			);
@@ -383,7 +383,7 @@
 			);
 			name = "PC-Watch";
 			productName = "PC-Watch";
-			productReference = 27BF9DB1243BD385006A5466 /* PC-Watch.app */;
+			productReference = 27BF9DB1243BD385006A5466 /* Manifest My Space.app */;
 			productType = "com.apple.product-type.application.watchapp2-container";
 		};
 		27BF9DB4243BD385006A5466 /* PC-Watch WatchKit App */ = {
@@ -785,7 +785,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PC-Watch WatchKit Extension/PC-Watch WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"PC-Watch WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				ENABLE_PREVIEWS = YES;
@@ -815,7 +815,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PC-Watch WatchKit Extension/PC-Watch WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"PC-Watch WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				ENABLE_PREVIEWS = YES;
@@ -846,7 +846,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PC-Watch WatchKit App/PC-Watch WatchKit AppDebug.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				IBSC_MODULE = PC_Watch_WatchKit_Extension;
 				INFOPLIST_FILE = "PC-Watch WatchKit App/Info.plist";
@@ -871,7 +871,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PC-Watch WatchKit App/PC-Watch WatchKit AppRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				IBSC_MODULE = PC_Watch_WatchKit_Extension;
 				INFOPLIST_FILE = "PC-Watch WatchKit App/Info.plist";
@@ -893,11 +893,11 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.infiniteoptions.caitlinwatch;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Manifest My Space";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
@@ -909,11 +909,11 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.infiniteoptions.caitlinwatch;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Manifest My Space";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};

@@ -185,6 +185,9 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenter
                 return
             }
             
+            let bg = BackgroundService.shared;
+            bg.updateActiveComplication();
+            
             print("*** Background Task Scheduled! ***")
         }
     }

@@ -11,6 +11,7 @@ import SwiftUI
 struct LoadingView: View {
     @State var isLoading = false
     @ObservedObject var User = UserManager.shared
+    let networkModel = NetworkManager.shared
     
     var body: some View {
         VStack{
@@ -27,7 +28,7 @@ struct LoadingView: View {
                     .stroke(Color.white, lineWidth: 4)
                     .frame(width: 55, height: 55)
                 
-                Image("App Icon")
+                Image(self.networkModel.globalManifestIcon)
                     .resizable()
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.white, lineWidth: 1))

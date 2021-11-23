@@ -13,11 +13,12 @@ struct LaunchScreenView: View {
     @State var showSignIn = false
     @ObservedObject var viewPick = ViewController.shared
     @ObservedObject var User = UserManager.shared
+    let networkModel = NetworkManager.shared
 
     var body: some View {
         GeometryReader { geo in
             VStack{
-                Image("ManifestMySpaceIcon")
+                Image(self.networkModel.globalManifestIcon)
                     .resizable()
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.white, lineWidth: 1))

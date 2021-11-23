@@ -46,6 +46,7 @@ class NetworkManager: ObservableObject {
     
     let trueCase = "true"
     let falseCase = "false"
+    let globalManifestIcon = "ManifestMySpaceIcon"
     
     //Key: Goal, Value: tasks
     @Published var goalsSubtasks = [String: [ValueTask]?]()
