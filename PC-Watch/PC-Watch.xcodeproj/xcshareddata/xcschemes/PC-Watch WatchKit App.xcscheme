@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "27BF9DB0243BD385006A5466"
-               BuildableName = "PC-Watch.app"
+               BuildableName = "Manifest My Space.app"
                BlueprintName = "PC-Watch"
                ReferencedContainer = "container:PC-Watch.xcodeproj">
             </BuildableReference>
@@ -55,10 +55,8 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       notificationPayloadFile = "PC-Watch WatchKit Extension/PushNotificationPayload.apns">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/Manifest My Space">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "27BF9DB4243BD385006A5466"
@@ -66,7 +64,7 @@
             BlueprintName = "PC-Watch WatchKit App"
             ReferencedContainer = "container:PC-Watch.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -75,10 +73,8 @@
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES"
       notificationPayloadFile = "PC-Watch WatchKit Extension/PushNotificationPayload.apns">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/Manifest My Space">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "27BF9DB4243BD385006A5466"
@@ -86,16 +82,7 @@
             BlueprintName = "PC-Watch WatchKit App"
             ReferencedContainer = "container:PC-Watch.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "27BF9DB4243BD385006A5466"
-            BuildableName = "PC-Watch WatchKit App.app"
-            BlueprintName = "PC-Watch WatchKit App"
-            ReferencedContainer = "container:PC-Watch.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

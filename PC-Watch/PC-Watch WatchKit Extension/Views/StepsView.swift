@@ -631,7 +631,7 @@ struct checkStepView: View {
 //                isMustDoTasks
             }
             label: {
-                if (checked) {
+                if (self.step?.isComplete.lowercased() == "true") {
                     Image(systemName: "checkmark.circle")
                         .frame(width: 30, height: 30, alignment: .center)
                 }

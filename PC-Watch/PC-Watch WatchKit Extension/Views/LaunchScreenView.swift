@@ -28,6 +28,9 @@ struct LaunchScreenView: View {
                 Text("Manifest MySpace")
                     .fontWeight(.bold)
                     .font(.system(size: 19, design: .rounded))
+                
+                Text("version: \(Bundle.main.releaseVersionNumber!), build: \(Bundle.main.buildVersionNumber!)")
+                    .font(.system(size: 13, design: .rounded))
 
                 Spacer()
                 
@@ -46,3 +49,4 @@ struct LaunchScreenView_Previews: PreviewProvider {
         LaunchScreenView()
     }
 }
+

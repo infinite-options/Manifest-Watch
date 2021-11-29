@@ -1,25 +1,25 @@
 {
   "images" : [
     {
-      "filename" : "Icon-App-1024x1024 (5).png",
+      "filename" : "Icon-App-182x182 (1) copy 3.png",
       "idiom" : "watch",
       "scale" : "2x",
       "screen-width" : "<=145"
     },
     {
-      "filename" : "Icon-App-1024x1024 (6).png",
+      "filename" : "Icon-App-203x203 (1) copy .png",
       "idiom" : "watch",
       "scale" : "2x",
       "screen-width" : ">161"
     },
     {
-      "filename" : "Icon-App-1024x1024 (6)-1.png",
+      "filename" : "Icon-App-203x203 (1) copy 4.png",
       "idiom" : "watch",
       "scale" : "2x",
       "screen-width" : ">145"
     },
     {
-      "filename" : "Icon-App-1024x1024 (7).png",
+      "filename" : "Icon-App-224x224 5.png",
       "idiom" : "watch",
       "scale" : "2x",
       "screen-width" : ">183"

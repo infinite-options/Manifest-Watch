@@ -189,7 +189,7 @@ struct checkTaskView: View {
 //                isMustDoTasks
             }
             label: {
-                if (checked || self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isComplete.lowercased() == "true") {
+                if (self.model.goalsSubTasks[self.goal!.grUniqueID]??[taskIndex!].isComplete.lowercased() == "true") {
                     Image(systemName: "checkmark.circle")
                         .frame(width: 30, height: 30, alignment: .center)
                 }
