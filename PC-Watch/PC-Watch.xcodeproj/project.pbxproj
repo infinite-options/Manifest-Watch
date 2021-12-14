@@ -62,6 +62,7 @@
 		8026263F2522DD4500BBD6E5 /* GoalsAndRoutines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8026263E2522DD4500BBD6E5 /* GoalsAndRoutines.swift */; };
 		80262647252531E900BBD6E5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80262646252531E800BBD6E5 /* UserInfo.swift */; };
 		8026264F2525330B00BBD6E5 /* ImportantPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8026264E2525330B00BBD6E5 /* ImportantPeople.swift */; };
+		A351CE742762FBCC00E42FC4 /* StepImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A351CE732762FBCC00E42FC4 /* StepImgView.swift */; };
 		A35DF1A4273D8BA900744FBA /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35DF1A3273D8BA900744FBA /* Step.swift */; };
 		B953BE291D0A84946553CF26 /* Pods_PC_Watch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 600280C77BFFE27E9AD9744C /* Pods_PC_Watch.framework */; };
 		B9CC4E03B1FF90B49B4F56FB /* Pods_PC_Watch_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482D9F31ECC344DC84CE37D7 /* Pods_PC_Watch_WatchKit_Extension.framework */; };
@@ -173,6 +174,7 @@
 		8026263E2522DD4500BBD6E5 /* GoalsAndRoutines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsAndRoutines.swift; sourceTree = "<group>"; };
 		80262646252531E800BBD6E5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		8026264E2525330B00BBD6E5 /* ImportantPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantPeople.swift; sourceTree = "<group>"; };
+		A351CE732762FBCC00E42FC4 /* StepImgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepImgView.swift; sourceTree = "<group>"; };
 		A35DF1A3273D8BA900744FBA /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		A3B4063A2745B49500A13B53 /* PC-Watch WatchKit AppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PC-Watch WatchKit AppDebug.entitlements"; sourceTree = "<group>"; };
 		A3B4063B2745B4D200A13B53 /* PC-Watch WatchKit AppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PC-Watch WatchKit AppRelease.entitlements"; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				046D8CBA24E9D3D700D33871 /* PersonView.swift */,
 				047A4A3725095C590031C7B8 /* CheckingInView.swift */,
 				04C6C501250BF8430021B4F4 /* CircularView.swift */,
+				A351CE732762FBCC00E42FC4 /* StepImgView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				0484C4FE24B90D55002C3F13 /* AsyncSmallImage.swift in Sources */,
 				3881BAB4253812CE0074FDEE /* RDSPostModels.swift in Sources */,
 				2BCAEB0D24E0116D003E8917 /* AboutMeView.swift in Sources */,
+				A351CE742762FBCC00E42FC4 /* StepImgView.swift in Sources */,
 				2B5A688A24AFBD2000D66FC6 /* StepsView.swift in Sources */,
 				0473E06D24F8870E00A73A69 /* PeopleRow.swift in Sources */,
 				27E475A9244240B200D380FA /* ImageLoader.swift in Sources */,
@@ -785,7 +789,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PC-Watch WatchKit Extension/PC-Watch WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"PC-Watch WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				ENABLE_PREVIEWS = YES;
@@ -815,7 +819,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PC-Watch WatchKit Extension/PC-Watch WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"PC-Watch WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				ENABLE_PREVIEWS = YES;
@@ -846,7 +850,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PC-Watch WatchKit App/PC-Watch WatchKit AppDebug.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				IBSC_MODULE = PC_Watch_WatchKit_Extension;
 				INFOPLIST_FILE = "PC-Watch WatchKit App/Info.plist";
@@ -871,7 +875,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PC-Watch WatchKit App/PC-Watch WatchKit AppRelease.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				IBSC_MODULE = PC_Watch_WatchKit_Extension;
 				INFOPLIST_FILE = "PC-Watch WatchKit App/Info.plist";
@@ -893,7 +897,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.infiniteoptions.caitlinwatch;
@@ -909,7 +913,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.infiniteoptions.caitlinwatch;
