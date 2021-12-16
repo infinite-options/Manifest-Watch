@@ -174,6 +174,7 @@
 		8026263E2522DD4500BBD6E5 /* GoalsAndRoutines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsAndRoutines.swift; sourceTree = "<group>"; };
 		80262646252531E800BBD6E5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		8026264E2525330B00BBD6E5 /* ImportantPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantPeople.swift; sourceTree = "<group>"; };
+		A3053056276AFCC900FC7497 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A351CE732762FBCC00E42FC4 /* StepImgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepImgView.swift; sourceTree = "<group>"; };
 		A35DF1A3273D8BA900744FBA /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		A3B4063A2745B49500A13B53 /* PC-Watch WatchKit AppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PC-Watch WatchKit AppDebug.entitlements"; sourceTree = "<group>"; };
@@ -225,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				0473E06624F7117F00A73A69 /* GoogleService-Info.plist */,
+				A3053056276AFCC900FC7497 /* Info.plist */,
 				27BF9DB9243BD385006A5466 /* PC-Watch WatchKit App */,
 				27BF9DC8243BD389006A5466 /* PC-Watch WatchKit Extension */,
 				27BF9DB2243BD385006A5466 /* Products */,
@@ -789,7 +791,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PC-Watch WatchKit Extension/PC-Watch WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"PC-Watch WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				ENABLE_PREVIEWS = YES;
@@ -819,7 +821,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PC-Watch WatchKit Extension/PC-Watch WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"PC-Watch WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				ENABLE_PREVIEWS = YES;
@@ -850,7 +852,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PC-Watch WatchKit App/PC-Watch WatchKit AppDebug.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				IBSC_MODULE = PC_Watch_WatchKit_Extension;
 				INFOPLIST_FILE = "PC-Watch WatchKit App/Info.plist";
@@ -875,7 +877,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PC-Watch WatchKit App/PC-Watch WatchKit AppRelease.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
 				IBSC_MODULE = PC_Watch_WatchKit_Extension;
 				INFOPLIST_FILE = "PC-Watch WatchKit App/Info.plist";
@@ -897,8 +899,9 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
+				INFOPLIST_FILE = Info.plist;
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.infiniteoptions.caitlinwatch;
 				PRODUCT_NAME = "Manifest My Space";
@@ -913,8 +916,9 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 8V66NC2T37;
+				INFOPLIST_FILE = Info.plist;
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.infiniteoptions.caitlinwatch;
 				PRODUCT_NAME = "Manifest My Space";
